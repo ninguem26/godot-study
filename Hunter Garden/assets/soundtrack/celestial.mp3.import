@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/celestial.mp3-3817aef5400616797271409037c004b0.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/celestial.mp3"
+dest_files=[ "res://.import/celestial.mp3-3817aef5400616797271409037c004b0.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

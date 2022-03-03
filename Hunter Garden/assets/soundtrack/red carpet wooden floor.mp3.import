@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/red carpet wooden floor.mp3-ad074eec194bd174864dbad770042a74.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/red carpet wooden floor.mp3"
+dest_files=[ "res://.import/red carpet wooden floor.mp3-ad074eec194bd174864dbad770042a74.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
