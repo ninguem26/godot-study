@@ -55,13 +55,15 @@ extents = Vector2( 8.5, 14.5 )
 [node name="JungleGuy" type="KinematicBody2D"]
 script = ExtResource( 25 )
 walk_speed = 120
+jump_speed = 225
+gravity = 600
 acceleration = 0.5
 friction = 0.75
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Idle"
-frame = 7
+frame = 2
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
