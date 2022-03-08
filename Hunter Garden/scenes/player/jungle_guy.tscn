@@ -57,13 +57,14 @@ script = ExtResource( 25 )
 walk_speed = 120
 jump_speed = 225
 gravity = 600
+idle_threshold = 3
 acceleration = 0.5
 friction = 0.75
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Idle"
-frame = 2
+frame = 8
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
