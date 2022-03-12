@@ -60,11 +60,12 @@ gravity = 600
 idle_threshold = 3
 acceleration = 0.5
 friction = 0.75
+dash_length = 0.2
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Idle"
-frame = 8
+frame = 4
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -76,3 +77,5 @@ shape = SubResource( 2 )
 [node name="DashTimer" type="Timer" parent="."]
 
 [node name="Camera" type="Camera2D" parent="."]
+
+[connection signal="timeout" from="DashTimer" to="." method="on_dash_timeout"]
