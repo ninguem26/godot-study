@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const SMOKEFX = preload("res://scenes/effects/smoke_fx.tscn")
+const DASHFX = preload("res://scenes/effects/dash_fx.tscn")
 
 var velocity: Vector2
 var dash_direction: Vector2
@@ -14,6 +15,7 @@ export(int) var walk_speed
 export(int) var jump_speed
 export(int) var gravity
 export(int) var idle_threshold
+export(int) var dash_speed
 
 export(float) var acceleration
 export(float) var friction
@@ -21,6 +23,7 @@ export(float) var dash_length
 
 onready var animated_sprite: AnimatedSprite = get_node("AnimatedSprite")
 onready var dash_timer: Timer = get_node("DashTimer")
+onready var dash_particles: Particles2D = get_node("DashParticles")
 
 func _physics_process(delta: float) -> void:
 	move()
@@ -31,12 +34,8 @@ func _physics_process(delta: float) -> void:
 	jump()
 
 func move() -> void:
-	var input_vector: Vector2 = Vector2.ZERO
-	
-	var input_left: float = Input.get_action_strength("Left")
-	var input_right: float = Input.get_action_strength("Right")
-	
-	input_vector.x = input_right - input_left
+	var input_vector: Vector2 = Vector2.ZERO	
+	input_vector.x = input_dir("Right", "Left")
 	
 	if input_vector.x != 0:
 		velocity.x = lerp(velocity.x, walk_speed * input_vector.x, acceleration)
@@ -47,10 +46,12 @@ func jump() -> void:
 	if is_on_floor() and jump_count != 0:
 		spawn_dust_effect()
 		jump_count = 0
+		can_dash = false
 	
 	if Input.is_action_just_pressed("Jump") and jump_count < 2:
 		jump_count += 1
 		velocity.y = -jump_speed
+		can_dash = true
 
 func animate() -> void:
 	change_direction()
@@ -90,10 +91,44 @@ func handle_dash() -> void:
 		can_dash = false
 		dash_direction = dash()
 		dash_timer.start(dash_length)
+	
+	if is_dashing:
+		dash_particles.emitting = true
+		spawn_dash_effect()
+		dash_direction = move_and_slide(dash_direction)
+		
+		if is_on_floor() or is_on_wall():
+			is_dashing = false
+	else:
+		dash_particles.emitting = false
 
 func dash() -> Vector2:
 	var input_vector: Vector2 = Vector2.ZERO
-	return Vector2.ZERO
+	input_vector.x = input_dir("Right", "Left")
+	input_vector.y = input_dir("Down", "Up")
+	input_vector = input_vector.clamped(1)
+	
+	if input_vector == Vector2.ZERO:
+		if animated_sprite.flip_h:
+			input_vector.x = -1
+		else:
+			input_vector.x = 1
+	
+	return input_vector * dash_speed
 
 func on_dash_timeout() -> void:
 	is_dashing = false
+
+func input_dir(first_input: String, second_input: String) -> float:
+	var input_1: float = Input.get_action_strength(first_input)
+	var input_2: float = Input.get_action_strength(second_input)
+	
+	return input_1 - input_2
+
+func spawn_dash_effect() -> void:
+	var dash: Object = DASHFX.instance()
+	
+	dash.texture = animated_sprite.frames.get_frame(animated_sprite.animation, animated_sprite.frame)
+	dash.global_position = global_position
+	dash.flip_h = animated_sprite.flip_h
+	get_tree().root.call_deferred("add_child", dash)

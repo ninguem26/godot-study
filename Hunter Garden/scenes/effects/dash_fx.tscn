@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/effects/dash_fx.gd" type="Script" id=1]
+
+[node name="DashFX" type="Sprite"]
+script = ExtResource( 1 )
