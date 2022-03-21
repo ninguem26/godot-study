@@ -82,11 +82,12 @@ dash_speed = 300
 acceleration = 0.5
 friction = 0.75
 dash_length = 0.2
+attack_cooldown = 1.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Idle"
-frame = 11
+frame = 2
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -96,6 +97,8 @@ shape = SubResource( 2 )
 [node name="SpellSpawner" type="Position2D" parent="."]
 
 [node name="DashTimer" type="Timer" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
 
 [node name="Camera" type="Camera2D" parent="."]
 
@@ -107,3 +110,4 @@ process_material = SubResource( 3 )
 texture = ExtResource( 26 )
 
 [connection signal="timeout" from="DashTimer" to="." method="on_dash_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="on_attack_timeout"]

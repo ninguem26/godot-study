@@ -2,11 +2,15 @@ extends KinematicBody2D
 
 const SMOKEFX = preload("res://scenes/effects/smoke_fx.tscn")
 const DASHFX = preload("res://scenes/effects/dash_fx.tscn")
+const SPELL = preload("res://scenes/player/spell.tscn")
 
 var velocity: Vector2
 var dash_direction: Vector2
 
 var jump_count: int = 0
+var spell_spawner_position_x: int = 18
+
+var can_attack: bool = true
 
 var can_dash: bool = false
 var is_dashing: bool = false
@@ -20,13 +24,20 @@ export(int) var dash_speed
 export(float) var acceleration
 export(float) var friction
 export(float) var dash_length
+export(float) var attack_cooldown
 
 onready var animated_sprite: AnimatedSprite = get_node("AnimatedSprite")
 onready var dash_timer: Timer = get_node("DashTimer")
 onready var dash_particles: Particles2D = get_node("DashParticles")
+onready var attack_timer: Timer = get_node("AttackTimer")
+onready var spell_spawner: Position2D = get_node("SpellSpawner")
+
+func _ready() -> void:
+	attack_timer.set_wait_time(attack_cooldown)
 
 func _physics_process(delta: float) -> void:
 	move()
+	attack()
 	handle_dash()
 	animate()
 	velocity.y += gravity * delta
@@ -63,8 +74,10 @@ func animate() -> void:
 
 func change_direction() -> void:
 	if velocity.x > 0:
+		spell_spawner.position.x = spell_spawner_position_x
 		animated_sprite.flip_h = false
 	elif velocity.x < 0:
+		spell_spawner.position.x = -spell_spawner_position_x
 		animated_sprite.flip_h = true
 	
 func jump_animation() -> void:
@@ -132,3 +145,18 @@ func spawn_dash_effect() -> void:
 	dash.global_position = global_position
 	dash.flip_h = animated_sprite.flip_h
 	get_tree().root.call_deferred("add_child", dash)
+
+func attack() -> void:
+	if Input.is_action_just_pressed("Attack") and can_attack:
+		var spell: Object = SPELL.instance()
+		
+		spell.global_position = spell_spawner.global_position
+		spell.direction = sign(spell_spawner.position.x)
+		
+		get_tree().root.call_deferred("add_child", spell)
+		
+		attack_timer.start()
+		can_attack = false
+
+func on_attack_timeout():
+	can_attack = true
