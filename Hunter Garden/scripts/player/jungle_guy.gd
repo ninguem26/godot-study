@@ -2,10 +2,13 @@ extends KinematicBody2D
 
 const SMOKEFX = preload("res://scenes/effects/smoke_fx.tscn")
 const DASHFX = preload("res://scenes/effects/dash_fx.tscn")
+const EXPLOSIONFX = preload("res://scenes/effects/explosion_fx.tscn")
 const SPELL = preload("res://scenes/player/spell.tscn")
 
 var velocity: Vector2
+var knockback: Vector2
 var dash_direction: Vector2
+var enemy_position: Vector2
 
 var jump_count: int = 0
 var spell_spawner_position_x: int = 18
@@ -20,17 +23,23 @@ export(int) var jump_speed
 export(int) var gravity
 export(int) var idle_threshold
 export(int) var dash_speed
+export(int) var knockback_speed
 
 export(float) var acceleration
 export(float) var friction
 export(float) var dash_length
 export(float) var attack_cooldown
 
+export(int) var health
+export(bool) var on_hit
+
 onready var animated_sprite: AnimatedSprite = get_node("AnimatedSprite")
-onready var dash_timer: Timer = get_node("DashTimer")
 onready var dash_particles: Particles2D = get_node("DashParticles")
-onready var attack_timer: Timer = get_node("AttackTimer")
 onready var spell_spawner: Position2D = get_node("SpellSpawner")
+onready var animation: AnimationPlayer = get_node("Animation")
+onready var attack_timer: Timer = get_node("AttackTimer")
+onready var dash_timer: Timer = get_node("DashTimer")
+onready var camera: Camera2D = get_node("Camera")
 
 func _ready() -> void:
 	attack_timer.set_wait_time(attack_cooldown)
@@ -48,6 +57,13 @@ func move() -> void:
 	var input_vector: Vector2 = Vector2.ZERO	
 	input_vector.x = input_dir("Right", "Left")
 	
+	if on_hit:
+		var direction: Vector2 = (global_position - enemy_position).normalized()
+		
+		knockback.x = (direction.x * knockback_speed) * 2
+		knockback.y = -knockback_speed / 2
+		knockback = move_and_slide(knockback)
+	
 	if input_vector.x != 0:
 		velocity.x = lerp(velocity.x, walk_speed * input_vector.x, acceleration)
 	else:
@@ -58,6 +74,7 @@ func jump() -> void:
 		spawn_dust_effect()
 		jump_count = 0
 		can_dash = false
+		camera.shake(5, 0.2)
 	
 	if Input.is_action_just_pressed("Jump") and jump_count < 2:
 		jump_count += 1
@@ -148,6 +165,8 @@ func spawn_dash_effect() -> void:
 
 func attack() -> void:
 	if Input.is_action_just_pressed("Attack") and can_attack:
+		#camera.shake(5, 0.2)
+		update_health(3, global_position + Vector2(100, 0))
 		var spell: Object = SPELL.instance()
 		
 		spell.global_position = spell_spawner.global_position
@@ -160,3 +179,24 @@ func attack() -> void:
 
 func on_attack_timeout():
 	can_attack = true
+
+func update_health(damage_amount: int, enemy_global_position: Vector2) -> void:
+	animation.play("Hit")
+	enemy_position = enemy_global_position
+	on_hit = true
+	health -= damage_amount
+	
+	if health <= 0:
+		kill()
+	else:
+		camera.shake(10, 0.3)
+
+func kill() -> void:
+	instance_explosion()
+	queue_free()
+
+func instance_explosion() -> void:
+	var explosion: Object = EXPLOSIONFX.instance()
+	
+	explosion.global_position = global_position + Vector2(0, -10)
+	get_tree().root.call_deferred("add_child", explosion)
