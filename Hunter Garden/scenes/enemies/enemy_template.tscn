@@ -18,3 +18,7 @@ script = ExtResource( 1 )
 [node name="DamageArea" type="Area2D" parent="."]
 
 [node name="Collision" type="CollisionShape2D" parent="DamageArea"]
+
+[connection signal="body_entered" from="DetectionArea" to="." method="on_detection_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="on_detection_body_exited"]
+[connection signal="body_entered" from="DamageArea" to="." method="on_damage_body_entered"]
