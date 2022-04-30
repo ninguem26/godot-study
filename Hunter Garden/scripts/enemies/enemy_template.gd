@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const EXPLOSION_FX = preload("res://scenes/effects/explosion_fx.tscn")
+
 onready var animation: AnimationPlayer = get_node("Animation")
 onready var sprite: Sprite = get_node("Sprite")
 
@@ -17,14 +19,14 @@ var player_ref: Object = null
 var velocity: Vector2
 
 func _physics_process(delta: float) -> void:
-	move()
+	move(delta)
 	animate()
 	change_direction()
 
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 
-func move() -> void:
+func move(_delta: float) -> void:
 	if player_ref != null and not can_fly:
 		var direction: float = player_ref.global_position.x - global_position.x
 		
@@ -49,3 +51,9 @@ func on_detection_body_exited(_body: Object) -> void:
 
 func on_damage_body_entered(_body: Object) -> void:
 	pass
+
+func instance_explosion(offset: Vector2) -> void:
+	var explosion: Object = EXPLOSION_FX.instance()
+	
+	get_tree().root.call_deferred("add_child", explosion)
+	explosion.global_position = global_position + offset

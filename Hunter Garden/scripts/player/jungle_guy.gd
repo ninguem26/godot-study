@@ -165,8 +165,8 @@ func spawn_dash_effect() -> void:
 
 func attack() -> void:
 	if Input.is_action_just_pressed("Attack") and can_attack:
-		#camera.shake(5, 0.2)
-		update_health(3, global_position + Vector2(100, 0))
+		camera.shake(5, 0.2)
+		
 		var spell: Object = SPELL.instance()
 		
 		spell.global_position = spell_spawner.global_position
