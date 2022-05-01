@@ -278,7 +278,7 @@ radius = 176.011
 radius = 13.1529
 
 [node name="Bat" groups=["Enemy"] instance=ExtResource( 1 )]
-collision_layer = 0
+collision_layer = 4
 script = ExtResource( 5 )
 can_fly = true
 walk_speed = 100
