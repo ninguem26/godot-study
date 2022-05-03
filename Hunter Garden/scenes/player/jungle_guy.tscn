@@ -128,7 +128,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[node name="JungleGuy" type="KinematicBody2D"]
+[node name="JungleGuy" type="KinematicBody2D" groups=["Player"]]
 collision_layer = 2
 script = ExtResource( 25 )
 walk_speed = 120
@@ -146,7 +146,7 @@ health = 5
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Idle"
-frame = 3
+frame = 6
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
