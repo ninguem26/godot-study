@@ -1,21 +1,22 @@
+class_name BaseState
 extends Node
-
-enum State {
-	Null,
-	Run,
-	Walk,
-	Dash,
-	Idle
-}
 
 var player: Object
 
+func enter() -> void:
+	pass
 
+func exit() -> void:
+	pass
 
-var current_state = State.Idle
+func input(_event: InputEvent) -> BaseState:
+	return null
 
-func init(owner: Object) -> void:
-	player = owner
+func process(_delta: float) -> BaseState:
+	return null
+
+func init(new_player: Object) -> void:
+	player = new_player
 
 func physics_process(_delta: float) -> void:
 	move()

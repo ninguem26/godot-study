@@ -8,10 +8,20 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "BaseState",
+"language": "GDScript",
+"path": "res://scripts/base_state.gd"
+} ]
+_global_script_class_icons={
+"BaseState": ""
+}
+
 [application]
 
 config/name="State Machine"
-run/main_scene="res://scenes/player.tscn"
+run/main_scene="res://scenes/world.tscn"
 config/icon="res://icon.png"
 
 [input]
