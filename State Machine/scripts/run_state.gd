@@ -6,7 +6,7 @@ func input(event: InputEvent) -> BaseState:
 	if new_state:
 		return new_state
 	
-	if Input.is_action_pressed('mod_shift'):
-		return run_state
+	if Input.is_action_just_released('mod_shift'):
+		return walk_state
 	
 	return null

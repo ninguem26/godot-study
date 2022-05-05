@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/state_machine.gd" type="Script" id=1]
 [ext_resource path="res://scripts/idle_state.gd" type="Script" id=2]
 [ext_resource path="res://scripts/walk_state.gd" type="Script" id=3]
+[ext_resource path="res://scripts/run_state.gd" type="Script" id=4]
 
 [node name="StateMachine" type="Node"]
 script = ExtResource( 1 )
@@ -10,8 +11,18 @@ start_state = NodePath("Idle")
 
 [node name="Walk" type="Node" parent="."]
 script = ExtResource( 3 )
+run_node = NodePath("../Run")
 idle_node = NodePath("../Idle")
+walk_node = NodePath(".")
 
 [node name="Idle" type="Node" parent="."]
 script = ExtResource( 2 )
+run_node = NodePath("../Run")
+walk_node = NodePath("../Walk")
+
+[node name="Run" type="Node" parent="."]
+script = ExtResource( 4 )
+speed = 300
+run_node = NodePath(".")
+idle_node = NodePath("../Idle")
 walk_node = NodePath("../Walk")
