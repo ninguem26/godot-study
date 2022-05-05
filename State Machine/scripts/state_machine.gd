@@ -14,6 +14,7 @@ func physics_process(delta: float) -> void:
 	var new_state = current_state.physics_process(delta)
 	
 	if new_state:
+
 		change_state(new_state)
 
 func process(delta: float) -> void:
@@ -33,5 +34,4 @@ func change_state(new_state: BaseState) -> void:
 		current_state.exit()
 	
 	current_state = new_state
-	print(current_state)
 	current_state.enter()

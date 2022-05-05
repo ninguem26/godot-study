@@ -13,24 +13,23 @@ func input(_event: InputEvent) -> BaseState:
 	return null
 
 func physics_process(_delta: float) -> BaseState:
-	var new_state = move()
-	player.velocity = player.move_and_slide(player.velocity, Vector2.ZERO)
-	
-	return new_state
+	return move()
 
 func move() -> BaseState:
-	var input_vector: Vector2 = Vector2.ZERO
-	input_vector.x = input_dir("Right", "Left")
+	var direction = input_dir()
 	
-	if input_vector.x != 0:
-		player.velocity.x = lerp(player.velocity.x, player.walk_speed * input_vector.x, player.acceleration)
-	else:
-		return idle_node
+	player.velocity.x = lerp(player.velocity.x, player.walk_speed * direction, player.acceleration)
+	player.velocity = player.move_and_slide(player.velocity, Vector2.ZERO)
 	
-	return self
+	if direction == 0:
+		return idle_state
+	
+	return null
 
-func input_dir(first_input: String, second_input: String) -> float:
-	var input_1: float = Input.get_action_strength(first_input)
-	var input_2: float = Input.get_action_strength(second_input)
+func input_dir() -> int:
+	if Input.is_action_pressed('Left'):
+		return -1
+	elif Input.is_action_pressed('Right'):
+		return 1
 	
-	return input_1 - input_2
+	return 0

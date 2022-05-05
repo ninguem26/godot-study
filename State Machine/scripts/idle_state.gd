@@ -17,4 +17,4 @@ func input(_event: InputEvent) -> BaseState:
 func physics_process(_delta: float) -> BaseState:
 	player.velocity.x = lerp(player.velocity.x, 0, player.friction)
 	
-	return self
+	return null
