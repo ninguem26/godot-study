@@ -17,3 +17,15 @@ func process(_delta: float) -> BaseState:
 
 func physics_process(_delta: float) -> BaseState:
 	return null
+
+func input_dir() -> int:
+	if Input.is_action_pressed('Left'):
+		player.dir = -1
+		
+		return player.dir
+	elif Input.is_action_pressed('Right'):
+		player.dir = 1
+		
+		return player.dir
+	
+	return 0

@@ -1,6 +1,7 @@
 extends BaseState
 
 export(int) var jump_speed = 150
+export(float) var gravity = 9.8
 
 func enter() -> void:
 	pass
