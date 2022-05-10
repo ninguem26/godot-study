@@ -3,8 +3,9 @@ extends KinematicBody2D
 
 onready var state_machine: Object = $StateMachine
 
-var velocity: Vector2
+export(float) var gravity = 0.9
 
+var velocity: Vector2
 var acceleration: float = 0.9
 var friction: float = 0.8
 

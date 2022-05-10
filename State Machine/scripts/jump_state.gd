@@ -1,19 +1,39 @@
 extends BaseState
 
+export(int) var speed = 150
 export(int) var jump_speed = 150
-export(float) var gravity = 9.8
 
-func enter() -> void:
-	pass
+export(NodePath) var idle_node
+export(NodePath) var run_node
+export(NodePath) var walk_node
+export(NodePath) var dash_node
+export(NodePath) var fall_node
 
-func exit() -> void:
-	pass
+onready var idle_state: BaseState = get_node(idle_node)
+onready var run_state: BaseState = get_node(run_node)
+onready var walk_state: BaseState = get_node(walk_node)
+onready var dash_state: BaseState = get_node(dash_node)
+onready var fall_state: BaseState = get_node(fall_node)
 
 func input(_event: InputEvent) -> BaseState:
-	return null
-
-func process(_delta: float) -> BaseState:
+	if Input.is_action_just_pressed('Dash'):
+		return dash_state
+	
 	return null
 
 func physics_process(_delta: float) -> BaseState:
+	return move()
+
+func move() -> BaseState:
+	if jump_speed <= 0:
+		return fall_state
+	
+	var direction = input_dir()
+	
+	player.velocity.y -= jump_speed
+	player.velocity.x = lerp(player.velocity.x, speed * direction, player.acceleration)
+	player.velocity = player.move_and_slide(player.velocity, Vector2.UP)
+	
+	jump_speed -= player.gravity
+		
 	return null

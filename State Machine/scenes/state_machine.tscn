@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/state_machine.gd" type="Script" id=1]
 [ext_resource path="res://scripts/idle_state.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scripts/run_state.gd" type="Script" id=4]
 [ext_resource path="res://scripts/dash_state.gd" type="Script" id=5]
 [ext_resource path="res://scripts/fall_state.gd" type="Script" id=6]
+[ext_resource path="res://scripts/jump_state.gd" type="Script" id=7]
 
 [node name="StateMachine" type="Node"]
 script = ExtResource( 1 )
@@ -18,6 +19,7 @@ idle_node = NodePath("../Idle")
 walk_node = NodePath(".")
 dash_node = NodePath("../Dash")
 fall_node = NodePath("../Fall")
+jump_node = NodePath("../Jump")
 
 [node name="Idle" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -25,6 +27,7 @@ run_node = NodePath("../Run")
 walk_node = NodePath("../Walk")
 dash_node = NodePath("../Dash")
 fall_node = NodePath("../Fall")
+jump_node = NodePath("../Jump")
 
 [node name="Run" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -34,6 +37,7 @@ idle_node = NodePath("../Idle")
 walk_node = NodePath("../Walk")
 dash_node = NodePath("../Dash")
 fall_node = NodePath("../Fall")
+jump_node = NodePath("../Jump")
 
 [node name="Dash" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -43,11 +47,20 @@ idle_node = NodePath("../Idle")
 walk_node = NodePath("../Walk")
 dash_node = NodePath(".")
 fall_node = NodePath("../Fall")
+jump_node = NodePath("../Jump")
 
 [node name="Fall" type="Node" parent="."]
 script = ExtResource( 6 )
-jump_speed = 300
+fall_speed = 300
 idle_node = NodePath("../Idle")
 run_node = NodePath("../Run")
 walk_node = NodePath("../Walk")
 dash_node = NodePath("../Dash")
+
+[node name="Jump" type="Node" parent="."]
+script = ExtResource( 7 )
+idle_node = NodePath("../Idle")
+run_node = NodePath("../Run")
+walk_node = NodePath("../Walk")
+dash_node = NodePath("../Dash")
+fall_node = NodePath("../Fall")
