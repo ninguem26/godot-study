@@ -26,6 +26,9 @@ func process(delta: float) -> BaseState:
 	if current_dash_time > 0:
 		return null
 	
+	if !player.is_on_floor():
+		return fall_state
+	
 	if Input.is_action_pressed('Left') or Input.is_action_pressed('Right'):
 		if Input.is_action_pressed('mod_shift'):
 			return run_state

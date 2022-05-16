@@ -1,8 +1,11 @@
 extends Node
 
+signal change_current_state(new_state)
+
 export(NodePath) var start_state
 
 var current_state: BaseState
+var previous_state: BaseState
 
 func init(player: Player) -> void:
 	for child in get_children():
@@ -32,5 +35,8 @@ func change_state(new_state: BaseState) -> void:
 	if current_state:
 		current_state.exit()
 	
+	previous_state = current_state
 	current_state = new_state
 	current_state.enter()
+	
+	emit_signal("change_current_state", current_state.name)

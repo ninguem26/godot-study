@@ -51,14 +51,16 @@ jump_node = NodePath("../Jump")
 
 [node name="Fall" type="Node" parent="."]
 script = ExtResource( 6 )
-fall_speed = 300
+max_fall_speed = 500.0
 idle_node = NodePath("../Idle")
 run_node = NodePath("../Run")
 walk_node = NodePath("../Walk")
 dash_node = NodePath("../Dash")
+jump_node = NodePath("../Jump")
 
 [node name="Jump" type="Node" parent="."]
 script = ExtResource( 7 )
+jump_speed = 500.0
 idle_node = NodePath("../Idle")
 run_node = NodePath("../Run")
 walk_node = NodePath("../Walk")
