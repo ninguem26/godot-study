@@ -1,5 +1,7 @@
 extends BaseState
 
+signal jump_before_landing()
+
 export(int) var speed = 150
 export(float) var max_fall_speed = 150
 
@@ -17,6 +19,8 @@ onready var jump_state: BaseState = get_node(jump_node)
 
 var current_fall_speed: float
 
+var jump_pressed: bool = false
+
 func enter() -> void:
 	if [jump_state, dash_state].has(player.state_machine.previous_state):
 		current_fall_speed = 0
@@ -26,8 +30,12 @@ func enter() -> void:
 func input(_event: InputEvent) -> BaseState:
 	if Input.is_action_just_pressed('Dash'):
 		return dash_state
-	elif Input.is_action_just_pressed('Jump') && player.current_jump_counter > 0:
-		return jump_state
+	elif Input.is_action_just_pressed('Jump'):
+		if player.current_jump_counter > 0:
+			return jump_state
+		else:
+			jump_pressed = true
+			emit_signal('jump_before_landing')
 	
 	return null
 
@@ -46,6 +54,9 @@ func move() -> BaseState:
 	if player.is_on_floor():
 		player.current_jump_counter = player.jump_counter
 		
+		if jump_pressed:
+			return jump_state
+		
 		if direction != 0:
 			if Input.is_action_pressed('mod_shift'):
 				return run_state
@@ -63,3 +74,6 @@ func calculate_fall_speed() -> float:
 		return max_fall_speed
 	
 	return current_fall_speed
+
+func _on_jump_timer_timeout() -> void:
+	jump_pressed = false

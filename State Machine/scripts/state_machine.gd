@@ -9,7 +9,8 @@ var previous_state: BaseState
 
 func init(player: Player) -> void:
 	for child in get_children():
-		child.player = player
+		if child is BaseState:
+			child.player = player
 	
 	change_state(get_node(start_state))
 
@@ -39,4 +40,4 @@ func change_state(new_state: BaseState) -> void:
 	current_state = new_state
 	current_state.enter()
 	
-	emit_signal("change_current_state", current_state.name)
+	emit_signal('change_current_state', current_state.name)

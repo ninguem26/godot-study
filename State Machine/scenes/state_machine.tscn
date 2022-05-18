@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/state_machine.gd" type="Script" id=1]
 [ext_resource path="res://scripts/idle_state.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scripts/dash_state.gd" type="Script" id=5]
 [ext_resource path="res://scripts/fall_state.gd" type="Script" id=6]
 [ext_resource path="res://scripts/jump_state.gd" type="Script" id=7]
+[ext_resource path="res://scripts/jump_timer.gd" type="Script" id=8]
 
 [node name="StateMachine" type="Node"]
 script = ExtResource( 1 )
@@ -66,3 +67,10 @@ run_node = NodePath("../Run")
 walk_node = NodePath("../Walk")
 dash_node = NodePath("../Dash")
 fall_node = NodePath("../Fall")
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.15
+script = ExtResource( 8 )
+
+[connection signal="jump_before_landing" from="Fall" to="JumpTimer" method="_on_jump_before_landing"]
+[connection signal="timeout" from="JumpTimer" to="Fall" method="_on_jump_timer_timeout"]
