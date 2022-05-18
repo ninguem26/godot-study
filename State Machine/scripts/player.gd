@@ -11,9 +11,11 @@ var acceleration: float = 0.9
 var friction: float = 0.8
 
 var dir: int = 1
+var current_jump_counter: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	current_jump_counter = jump_counter
 	state_machine.init(self)
 
 func _unhandled_input(event: InputEvent):

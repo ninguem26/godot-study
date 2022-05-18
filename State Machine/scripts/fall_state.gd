@@ -26,6 +26,8 @@ func enter() -> void:
 func input(_event: InputEvent) -> BaseState:
 	if Input.is_action_just_pressed('Dash'):
 		return dash_state
+	elif Input.is_action_just_pressed('Jump') && player.current_jump_counter > 0:
+		return jump_state
 	
 	return null
 
@@ -42,6 +44,8 @@ func move() -> BaseState:
 	current_fall_speed = calculate_fall_speed()
 	
 	if player.is_on_floor():
+		player.current_jump_counter = player.jump_counter
+		
 		if direction != 0:
 			if Input.is_action_pressed('mod_shift'):
 				return run_state

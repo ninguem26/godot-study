@@ -18,6 +18,7 @@ onready var fall_state: BaseState = get_node(fall_node)
 var current_jump_speed: float
 
 func enter() -> void:
+	player.current_jump_counter -= 1
 	current_jump_speed = jump_speed
 
 func input(_event: InputEvent) -> BaseState:

@@ -15,7 +15,7 @@ onready var jump_state: BaseState = get_node(jump_node)
 func input(_event: InputEvent) -> BaseState:
 	if Input.is_action_just_pressed('Dash'):
 		return dash_state
-	elif Input.is_action_just_pressed('Jump'):
+	elif Input.is_action_just_pressed('Jump') && player.current_jump_counter > 0:
 		return jump_state
 	
 	if Input.is_action_pressed('Left') or Input.is_action_pressed('Right'):
