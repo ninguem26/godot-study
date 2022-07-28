@@ -20,7 +20,7 @@ func _ready():
 func _unhandled_input(event: InputEvent):
 	state_machine.input(event)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:	
 	state_machine.physics_process(delta)
 
 func _process(delta: float) -> void:

@@ -10,7 +10,6 @@ extents = Vector2( 32, 32 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 3 )
-jump_counter = 2
 gravity = 24.0
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -29,5 +28,8 @@ margin_bottom = -18.0
 bbcode_text = "Teste"
 text = "Teste"
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="change_current_state" from="StateMachine" to="CurrentStateLabel" method="_on_change_current_state"]
