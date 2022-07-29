@@ -1,15 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://M484BulletCollection2.png" type="Texture" id=1]
+[ext_resource path="res://scripts/projectile.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+extents = Vector2( 6, 6 )
 
 [node name="Projectile" type="Area2D"]
+script = ExtResource( 2 )
+speed = 300.0
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.901961, 0.113725, 0.113725, 1 )
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 308.019, 401.013, 10.7329, 11.0678 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibilityNotifier" to="." method="on_screen_exited"]
