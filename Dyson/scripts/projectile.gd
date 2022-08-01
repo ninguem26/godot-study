@@ -3,7 +3,8 @@ extends Area2D
 export(float) var speed = 30.0
 
 func _physics_process(delta: float):
-	translate(Vector2(-speed*delta, 0))
+	var angle = Vector2(cos(rotation), sin(rotation))
+	translate(-speed*delta*angle)
 
 func on_screen_exited():
 	queue_free()
