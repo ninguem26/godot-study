@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/sun.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/gun_shield.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=3]
 
 [node name="World" type="Node"]
 
 [node name="Sun" parent="." instance=ExtResource( 1 )]
 position = Vector2( 492, 294 )
+
+[node name="Enemy" parent="Sun" instance=ExtResource( 3 )]
+position = Vector2( 285, -191 )
 
 [node name="GunShield" parent="." instance=ExtResource( 2 )]
 position = Vector2( 489, 156 )

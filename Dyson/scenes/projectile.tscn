@@ -20,4 +20,5 @@ shape = SubResource( 1 )
 
 [node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="."]
 
+[connection signal="body_entered" from="." to="." method="on_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier" to="." method="on_screen_exited"]
