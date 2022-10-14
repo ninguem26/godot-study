@@ -9,10 +9,13 @@
 [node name="Sun" parent="." instance=ExtResource( 1 )]
 position = Vector2( 492, 294 )
 
-[node name="Enemy" parent="Sun" instance=ExtResource( 3 )]
-position = Vector2( 285, -191 )
-
 [node name="GunShield" parent="." instance=ExtResource( 2 )]
 position = Vector2( 489, 156 )
 pivot_node = NodePath("../Sun")
 speed = 3.0
+
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 918, -47 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 58, -43 )

@@ -15,7 +15,7 @@ func on_screen_exited():
 	queue_free()
 
 func on_body_entered(body: Node) -> void:
-	connect('projectile_collision', body, 'on_projectile_collision')
+	var _connection = connect('projectile_collision', body, 'on_projectile_collision')
 	
 	emit_signal('projectile_collision', damage)
 	queue_free()
