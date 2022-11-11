@@ -23,7 +23,7 @@ func _physics_process(_delta: float) -> void:
 	attack()
 
 func rotated_point(angle, distance) -> Vector2:
-	return pivot_point + Vector2(sin(angle),cos(angle)) * distance
+	return pivot_point + Vector2(sin(angle), cos(angle)) * distance
 
 func move(direction: int) -> void:
 	var distance: float = pivot_point.distance_to(global_position)

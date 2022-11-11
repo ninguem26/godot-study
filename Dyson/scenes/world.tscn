@@ -19,3 +19,4 @@ position = Vector2( 918, -47 )
 
 [node name="Enemy2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 58, -43 )
+orbit_radius = 450.0
