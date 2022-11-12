@@ -14,6 +14,11 @@ config/name="Dyson"
 run/main_scene="res://scenes/world.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
 [input]
 
 attack={
