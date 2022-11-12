@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/sun.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/gun_shield.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/wave_manager.tscn" type="PackedScene" id=4]
 
 [node name="World" type="Node"]
 
@@ -14,10 +14,6 @@ position = Vector2( 489, 156 )
 pivot_node = NodePath("../Sun")
 speed = 3.0
 
-[node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 918, -47 )
-orbit_radius = 450.0
+[node name="Enemies" type="Node" parent="."]
 
-[node name="Enemy2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 58, -43 )
-orbit_radius = 450.0
+[node name="WaveManager" parent="." instance=ExtResource( 4 )]
