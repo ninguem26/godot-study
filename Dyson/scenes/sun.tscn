@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://sun.png" type="Texture" id=1]
+[ext_resource path="res://scripts/sun.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 55.0
 
 [node name="Sun" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource( 2 )
 
 [node name="Colision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

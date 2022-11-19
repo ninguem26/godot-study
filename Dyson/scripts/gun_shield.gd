@@ -47,3 +47,6 @@ func attack() -> void:
 		projectile.global_position = projectile_position.global_position
 		projectile.rotation = rotation
 		get_tree().root.call_deferred('add_child', projectile)
+
+func hit_by_projectile(_damage: int) -> void:
+	pass
