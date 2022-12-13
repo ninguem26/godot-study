@@ -20,7 +20,6 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	move(input_dir())
-	attack()
 
 func rotated_point(angle, distance) -> Vector2:
 	return pivot_point + Vector2(sin(angle), cos(angle)) * distance
@@ -41,12 +40,14 @@ func input_dir() -> int:
 	return 0
 
 func attack() -> void:
-	if Input.is_action_just_pressed('attack'):
-		var projectile: Object = PROJECTILE.instance()
-		
-		projectile.global_position = projectile_position.global_position
-		projectile.rotation = rotation
-		get_tree().root.call_deferred('add_child', projectile)
+	var projectile: Object = PROJECTILE.instance()
+	
+	projectile.global_position = projectile_position.global_position
+	projectile.rotation = rotation
+	get_tree().root.call_deferred('add_child', projectile)
+
+func on_attack_timer_timeout() -> void:
+	attack()
 
 func hit_by_projectile(_damage: int) -> void:
 	pass

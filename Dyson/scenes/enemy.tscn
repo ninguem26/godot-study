@@ -25,6 +25,7 @@ position = Vector2( 50, 0 )
 [node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="."]
 
 [node name="AttackTimer" type="Timer" parent="."]
+wait_time = 1.5
 
 [node name="WaitAttackTimer" type="Timer" parent="."]
 one_shot = true
