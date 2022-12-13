@@ -1,8 +1,7 @@
 extends Area2D
 
 export(float) var speed = 30.0
-
-export(int) var damage = 1
+export(float) var damage = 1.0
 
 func _physics_process(delta: float):
 	var angle = Vector2(cos(rotation), sin(rotation))
