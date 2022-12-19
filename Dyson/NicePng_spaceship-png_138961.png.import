@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/M484BulletCollection2.png-11e5b4ef22946191552975409edc024b.stex"
+path="res://.import/NicePng_spaceship-png_138961.png-86ecc0d3dafa6ad7eb848d4cdf5d55dc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://M484BulletCollection2.png"
-dest_files=[ "res://.import/M484BulletCollection2.png-11e5b4ef22946191552975409edc024b.stex" ]
+source_file="res://NicePng_spaceship-png_138961.png"
+dest_files=[ "res://.import/NicePng_spaceship-png_138961.png-86ecc0d3dafa6ad7eb848d4cdf5d55dc.stex" ]
 
 [params]
 
