@@ -23,6 +23,8 @@ star_path = NodePath("../Sun")
 position = Vector2( 492, 294 )
 
 [node name="WaveManager" parent="." instance=ExtResource( 4 )]
+min_orbit = 250
+max_orbit = 350
 
 [node name="SpaceShip" parent="." instance=ExtResource( 2 )]
 position = Vector2( 164, 117 )

@@ -7,10 +7,15 @@ export(float) var angular_speed = 2.0
 export(float) var max_speed = 3.0
 export(float) var current_angle = 0.0
 
+export(float) var max_health = 5.0
+
+export(int) var boundary_quoeficient = 26
+
 onready var boundaries: Vector2 = get_viewport_rect().size
 
+onready var health: float = max_health setget set_health
+
 func _physics_process(delta: float) -> void:
-	print(get_viewport_rect().size)
 	move(input_dir(), delta)
 
 func input_dir() -> int:
@@ -36,15 +41,21 @@ func rotate_around(direction: int) -> void:
 	rotation_degrees = current_angle
 
 func handle_out_of_viewport() ->void:
-	if position.x - 26 > boundaries.x:
-		position.x = -25
-	elif position.x + 26 < 0:
-		position.x = boundaries.x + 25
+	if position.x - boundary_quoeficient > boundaries.x:
+		position.x = -(boundary_quoeficient - 1)
+	elif position.x + boundary_quoeficient < 0:
+		position.x = boundaries.x + (boundary_quoeficient - 1)
 	
-	if position.y - 26 > boundaries.y:
-		position.y = -25
-	elif position.y + 26 < 0:
-		position.y = boundaries.y + 25
+	if position.y - boundary_quoeficient > boundaries.y:
+		position.y = -(boundary_quoeficient - 1)
+	elif position.y + boundary_quoeficient < 0:
+		position.y = boundaries.y + (boundary_quoeficient - 1)
 
-func hit_by_projectile(_damage: int) -> void:
-	pass
+func hit_by_projectile(damage: int) -> void:
+	set_health(health - damage)
+
+func set_health(value: float) -> void:
+	health = clamp(value, 0, max_health)
+	
+	if health <= 0:
+		queue_free()

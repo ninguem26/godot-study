@@ -3,6 +3,8 @@ extends Node
 const ENEMY = preload("res://scenes/enemy.tscn")
 
 export(int) var spawn_range = 500
+export(int) var min_orbit = 200
+export(int) var max_orbit = 400
 
 onready var top_spawner_position: Position2D = get_node("TopSpawnerPosition")
 onready var enemies: Node = get_node("Enemies")
@@ -23,7 +25,7 @@ func add_enemy() -> void:
 	var enemy: Object = ENEMY.instance()
 	
 	enemy.global_position = random_global_position()
-	enemy.orbit_radius = rng.randi_range(300, 500)
+	enemy.orbit_radius = rng.randi_range(min_orbit, max_orbit)
 	enemies.call_deferred('add_child', enemy)
 
 func random_global_position() -> Vector2:
