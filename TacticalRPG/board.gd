@@ -1,36 +1,49 @@
 extends Node
 
-var cells
-var selected_cell
-var previous_cell
+export var highlight_radius: int = 1
+export var cell_size: int = 64
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	cells = get_children()
+var selected_cell: Node2D
+var selected_connections: Array = []
 
-func _process(delta: float) -> void:
-	pass
+onready var cells = get_children()
 
 func _input(event) -> void:
 	if event.is_action_pressed("mouse_left"):
 		if selected_cell != null:
-			selected_cell.unmark()
-		var target_cell = ((event.position / 64).floor() * 64) + Vector2(32, 32)
-		selected_cell = find_cell_by_position(target_cell)
-		selected_cell.mark()
-		show_cell_radius(selected_cell, 1)
+			unmark_all()
+		
+		selected_cell = find_cell_by_position(event.position)
+		mark_all(selected_cell)
 
 func find_cell_by_position(position) -> Object:
+	var cell_offset: Vector2 = Vector2(cell_size/2, cell_size/2)
+	var cell_position: Vector2 = ((position / cell_size).floor() * cell_size) + cell_offset
+	
 	for cell in cells:
-		if cell.position.x == position.x:
-			if cell.position.y == position.y:
+		if cell.position.x == cell_position.x:
+			if cell.position.y == cell_position.y:
 				return cell
 	
 	return null
 
 func show_cell_radius(cell, radius) -> void:
+	print(cell)
+	print(cell.connections)
 	if radius >= 1:
-		for connection_cell in cell.conections:
-			if !connection_cell.selected:
-				connection_cell.mark()
-				show_cell_radius(connection_cell, radius - 1)
+		for cell_node in cell.connections:
+			if !cell_node.selected:
+				cell_node.mark()
+				show_cell_radius(cell_node, radius - 1)
+				selected_connections.append(cell_node)
+
+func mark_all(starting_cell) -> void:
+	if starting_cell != null:
+		starting_cell.mark()
+		show_cell_radius(starting_cell, highlight_radius)
+
+func unmark_all() -> void:
+	selected_cell.unmark()
+	for cell_node in selected_connections:
+		cell_node.unmark()
+	selected_connections.clear()

@@ -1,13 +1,15 @@
 extends Node2D
 
-export(Array, NodePath) var connections
+export(Array, NodePath) var connections_path
 
 onready var sprite = get_node('Sprite')
+onready var label = get_node('Label')
+onready var connections = init_connections()
 var selected = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	label.text = name
 
 func mark() -> void:
 	if !selected:
@@ -17,3 +19,10 @@ func mark() -> void:
 func unmark() -> void:
 	sprite.modulate = Color(1, 1, 1)
 	selected = false
+
+func init_connections() -> Array:
+	var connections_node = []
+	for connection in connections_path:
+		connections_node.append(get_node(connection))
+	
+	return connections_node
