@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Board",
+"language": "GDScript",
+"path": "res://board.gd"
+}, {
+"base": "Node2D",
+"class": "Cell",
+"language": "GDScript",
+"path": "res://cell.gd"
+} ]
+_global_script_class_icons={
+"Board": "",
+"Cell": ""
+}
+
 [application]
 
 config/name="TacticalRPG"

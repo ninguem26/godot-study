@@ -1,22 +1,24 @@
+class_name Board
 extends Node
 
 export var highlight_radius: int = 1
 export var cell_size: float = 64.0
 
-var selected_cell: Node2D
+var selected_cell: Cell
 var selected_connections: Array = []
 
-onready var cells = get_children()
+onready var cells: Array = get_children()
 
-func _input(event) -> void:
-	if event.is_action_pressed("mouse_left"):
-		if selected_cell != null:
-			unmark_all()
-		
-		selected_cell = find_cell_by_position(event.position)
-		mark_all(selected_cell)
+func _process(_delta: float) -> void:
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 
-func find_cell_by_position(position) -> Object:
+	if selected_cell != null:
+		unmark_all()
+	
+	selected_cell = find_cell_by_position(mouse_pos)
+	mark_all(selected_cell)
+
+func find_cell_by_position(position) -> Cell:
 	var cell_offset: Vector2 = Vector2(cell_size/2, cell_size/2)
 	var cell_position: Vector2 = ((position / cell_size).floor() * cell_size) + cell_offset
 	
@@ -32,7 +34,7 @@ func show_cell_radius(around_cells, radius) -> void:
 		var next_cells: Array = []
 		
 		for cell in around_cells:
-			if not cell.selected:
+			if cell.is_available():
 				cell.mark()
 				selected_connections.append(cell)
 				next_cells.append_array(cell.connections)
@@ -42,7 +44,8 @@ func show_cell_radius(around_cells, radius) -> void:
 func mark_all(starting_cell) -> void:
 	if starting_cell != null:
 		starting_cell.mark()
-		show_cell_radius(starting_cell.connections, highlight_radius)
+		if not starting_cell.blocked:
+			show_cell_radius(starting_cell.connections, highlight_radius)
 
 func unmark_all() -> void:
 	selected_cell.unmark()

@@ -30,6 +30,7 @@ connections_path = [ NodePath("../Cell10"), NodePath("../Cell3"), NodePath("../C
 [node name="Cell10" parent="." instance=ExtResource( 1 )]
 position = Vector2( 96, 96 )
 connections_path = [ NodePath("../Cell11"), NodePath("../Cell2"), NodePath("../Cell18"), NodePath("../Cell9") ]
+blocked = true
 
 [node name="Cell11" parent="." instance=ExtResource( 1 )]
 position = Vector2( 32, 96 )
