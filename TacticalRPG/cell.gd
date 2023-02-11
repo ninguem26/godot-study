@@ -2,12 +2,11 @@ extends Node2D
 
 export(Array, NodePath) var connections_path
 
-onready var sprite = get_node('Sprite')
-onready var label = get_node('Label')
-onready var connections = init_connections()
-var selected = false
+onready var sprite: Sprite = get_node('Sprite')
+onready var label: Label = get_node('Label')
+onready var connections: Array = init_connections()
+var selected: bool = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	label.text = name
 
@@ -21,7 +20,7 @@ func unmark() -> void:
 	selected = false
 
 func init_connections() -> Array:
-	var connections_node = []
+	var connections_node: Array = []
 	for connection in connections_path:
 		connections_node.append(get_node(connection))
 	

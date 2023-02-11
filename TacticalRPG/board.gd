@@ -1,7 +1,7 @@
 extends Node
 
 export var highlight_radius: int = 1
-export var cell_size: int = 64
+export var cell_size: float = 64.0
 
 var selected_cell: Node2D
 var selected_connections: Array = []
@@ -27,20 +27,22 @@ func find_cell_by_position(position) -> Object:
 	
 	return null
 
-func show_cell_radius(cell, radius) -> void:
-	print(cell)
-	print(cell.connections)
-	if radius >= 1:
-		for cell_node in cell.connections:
-			if !cell_node.selected:
-				cell_node.mark()
-				show_cell_radius(cell_node, radius - 1)
-				selected_connections.append(cell_node)
+func show_cell_radius(around_cells, radius) -> void:
+	if !around_cells.empty() && radius >= 1:
+		var next_cells: Array = []
+		
+		for cell in around_cells:
+			if not cell.selected:
+				cell.mark()
+				selected_connections.append(cell)
+				next_cells.append_array(cell.connections)
+		
+		show_cell_radius(next_cells, radius - 1)
 
 func mark_all(starting_cell) -> void:
 	if starting_cell != null:
 		starting_cell.mark()
-		show_cell_radius(starting_cell, highlight_radius)
+		show_cell_radius(starting_cell.connections, highlight_radius)
 
 func unmark_all() -> void:
 	selected_cell.unmark()
