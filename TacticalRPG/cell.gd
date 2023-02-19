@@ -16,7 +16,7 @@ var selected: bool = false
 
 func _ready() -> void:
 	label.text = name
-	if contained_object_path != '':
+	if not contained_object_path.is_empty():
 		contained_object = get_node(contained_object_path)
 
 func mark(color: Color) -> void:
