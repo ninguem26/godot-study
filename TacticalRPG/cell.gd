@@ -40,3 +40,6 @@ func is_available() -> bool:
 
 func is_occupied() -> bool:
 	return contained_object != null && contained_object.is_class('Node2D')
+
+func get_class() -> String:
+	return 'Cell'

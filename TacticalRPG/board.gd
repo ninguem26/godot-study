@@ -28,7 +28,7 @@ func _input(event: InputEvent) -> void:
 		pick_and_move()
 
 func find_cell_by_position(position) -> Cell:
-	var cell_offset: Vector2 = Vector2(cell_size/2, cell_size/2)
+	var cell_offset: Vector2 = Vector2(cell_size / 2, cell_size / 2)
 	var cell_position: Vector2 = ((position / cell_size).floor() * cell_size) + cell_offset
 	
 	for cell in cells:
