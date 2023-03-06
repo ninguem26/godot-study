@@ -8,55 +8,44 @@
 script = ExtResource( 2 )
 highlight_radius = 3
 
-[node name="Cell3" parent="." instance=ExtResource( 1 )]
+[node name="Cells" type="Node" parent="."]
+
+[node name="Cell3" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 160, 32 )
-connections_path = [ NodePath("../Cell2"), NodePath("../Cell9"), NodePath("../Cell6") ]
 
-[node name="Cell2" parent="." instance=ExtResource( 1 )]
+[node name="Cell2" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 96, 32 )
-connections_path = [ NodePath("../Cell"), NodePath("../Cell3"), NodePath("../Cell10") ]
 
-[node name="Cell" parent="." instance=ExtResource( 1 )]
+[node name="Cell" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 32, 32 )
-connections_path = [ NodePath("../Cell2"), NodePath("../Cell11") ]
 
-[node name="Cell6" parent="." instance=ExtResource( 1 )]
+[node name="Cell6" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 224, 32 )
-connections_path = [ NodePath("../Cell3"), NodePath("../Cell16") ]
 
-[node name="Cell9" parent="." instance=ExtResource( 1 )]
+[node name="Cell9" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 160, 96 )
-connections_path = [ NodePath("../Cell10"), NodePath("../Cell3"), NodePath("../Cell17"), NodePath("../Cell16") ]
 
-[node name="Cell10" parent="." instance=ExtResource( 1 )]
+[node name="Cell10" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 96, 96 )
-connections_path = [ NodePath("../Cell11"), NodePath("../Cell2"), NodePath("../Cell18"), NodePath("../Cell9") ]
 
-[node name="Cell11" parent="." instance=ExtResource( 1 )]
+[node name="Cell11" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 32, 96 )
-connections_path = [ NodePath("../Cell"), NodePath("../Cell19"), NodePath("../Cell10") ]
 
-[node name="Cell16" parent="." instance=ExtResource( 1 )]
+[node name="Cell16" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 224, 96 )
-connections_path = [ NodePath("../Cell9"), NodePath("../Cell6"), NodePath("../Cell24") ]
 
-[node name="Cell17" parent="." instance=ExtResource( 1 )]
+[node name="Cell17" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 160, 160 )
-connections_path = [ NodePath("../Cell18"), NodePath("../Cell9"), NodePath("../Cell24") ]
 
-[node name="Cell18" parent="." instance=ExtResource( 1 )]
+[node name="Cell18" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 96, 160 )
-connections_path = [ NodePath("../Cell19"), NodePath("../Cell10"), NodePath("../Cell17") ]
-contained_object_path = NodePath("../Wizard")
+contained_object_path = NodePath("../../Wizard")
 
-[node name="Cell19" parent="." instance=ExtResource( 1 )]
+[node name="Cell19" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 32, 160 )
-connections_path = [ NodePath("../Cell11"), NodePath("../Cell18") ]
 
-[node name="Cell24" parent="." instance=ExtResource( 1 )]
+[node name="Cell24" parent="Cells" instance=ExtResource( 1 )]
 position = Vector2( 224, 160 )
-connections_path = [ NodePath("../Cell17"), NodePath("../Cell16") ]
 
 [node name="Wizard" parent="." instance=ExtResource( 3 )]
 position = Vector2( 96, 160 )
-reach_radius = 2
