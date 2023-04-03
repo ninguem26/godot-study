@@ -7,8 +7,7 @@
 radius = 8.0
 height = 22.0
 
-[sub_resource type="Animation" id="Animation_gd4w2"]
-resource_name = "idle"
+[sub_resource type="Animation" id="Animation_vkx7y"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -23,7 +22,8 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_vkx7y"]
+[sub_resource type="Animation" id="Animation_gd4w2"]
+resource_name = "idle"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
