@@ -101,5 +101,11 @@ position = Vector2(200, 40)
 [node name="Star3" parent="." instance=ExtResource("3_qdag4")]
 position = Vector2(356, 8)
 
+[node name="Star4" parent="." instance=ExtResource("3_qdag4")]
+position = Vector2(72, 40)
+
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(192, 16)
+
+[node name="Star5" parent="." instance=ExtResource("3_qdag4")]
+position = Vector2(144, 16)

@@ -1,10 +1,14 @@
 extends Area2D
 
-@onready var animation_player = $AnimationPlayer
-@onready var sprite = $Sprite
+signal on_collected_item(points: int)
 
-var TW
-var TW2
+@export var value: int = 1
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sprite: Sprite2D = $Sprite
+
+var TW: Tween
+var TW2: Tween
 
 func _ready():
 	TW = create_tween().set_loops()
@@ -21,6 +25,8 @@ func _ready():
 	TW2.tween_property(sprite, 'position', Vector2(0, -1.5), 1)
 
 func on_body_entered(body):
+	emit_signal("on_collected_item", value)
+	
 	TW.stop()
 	TW2.stop()
 	animation_player.play("collected")
