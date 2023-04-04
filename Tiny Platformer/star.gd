@@ -21,6 +21,6 @@ func _ready():
 	TW2.tween_property(sprite, 'position', Vector2(0, -1.5), 1)
 
 func on_body_entered(body):
-	# TW.finished()
-	# TW2.finished()
+	TW.stop()
+	TW2.stop()
 	animation_player.play("collected")
