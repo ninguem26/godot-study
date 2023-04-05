@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq3v7vtbmivbd"]
+[gd_scene load_steps=7 format=3 uid="uid://bq3v7vtbmivbd"]
 
 [ext_resource type="Texture2D" uid="uid://bi02qb13fmao7" path="res://tileset_dirt_and_grass_1.png" id="1_hr5a8"]
 [ext_resource type="PackedScene" uid="uid://bh4rqdt6xm43i" path="res://player.tscn" id="2_n0dld"]
 [ext_resource type="PackedScene" uid="uid://bybfsyow1uvup" path="res://star.tscn" id="3_qdag4"]
+[ext_resource type="PackedScene" uid="uid://epfmgcr7mtss" path="res://gui.tscn" id="4_k7tx2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yanv7"]
 texture = ExtResource("1_hr5a8")
@@ -104,8 +105,12 @@ position = Vector2(356, 8)
 [node name="Star4" parent="." instance=ExtResource("3_qdag4")]
 position = Vector2(72, 40)
 
+[node name="Star5" parent="." instance=ExtResource("3_qdag4")]
+position = Vector2(144, 16)
+
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(192, 16)
 
-[node name="Star5" parent="." instance=ExtResource("3_qdag4")]
-position = Vector2(144, 16)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" parent="CanvasLayer" instance=ExtResource("4_k7tx2")]

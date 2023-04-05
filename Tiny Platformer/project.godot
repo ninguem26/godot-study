@@ -15,6 +15,11 @@ run/main_scene="res://map.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.png"
 
+[autoload]
+
+EventBus="*res://event_bus.gd"
+GameManager="*res://game_manager.gd"
+
 [display]
 
 window/stretch/scale=3.0

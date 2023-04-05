@@ -1,7 +1,5 @@
 extends Area2D
 
-signal on_collected_item(points: int)
-
 @export var value: int = 1
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -24,8 +22,8 @@ func _ready():
 	TW2.tween_property(sprite, 'position', Vector2(0, 2.5), 1)
 	TW2.tween_property(sprite, 'position', Vector2(0, -1.5), 1)
 
-func on_body_entered(body):
-	emit_signal("on_collected_item", value)
+func on_body_entered(_body):
+	EventBus.emit_signal("on_collected_item", value)
 	
 	TW.stop()
 	TW2.stop()
