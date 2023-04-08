@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	jump()
 
 func move() -> void:
-	var input_vector: Vector2 = Vector2.ZERO	
+	var input_vector: Vector2 = Vector2.ZERO
 	input_vector.x = input_dir("Right", "Left")
 	
 	if on_hit:
@@ -74,7 +74,7 @@ func jump() -> void:
 		spawn_dust_effect()
 		jump_count = 0
 		can_dash = false
-		camera.shake(5, 0.2)
+		# camera.shake(5, 0.2)
 	
 	if Input.is_action_just_pressed("Jump") and jump_count < 2:
 		jump_count += 1

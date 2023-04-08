@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bh4rqdt6xm43i"]
+[gd_scene load_steps=9 format=3 uid="uid://bh4rqdt6xm43i"]
 
 [ext_resource type="Texture2D" uid="uid://coi51ymyxt3l" path="res://characters.png" id="1_7tahg"]
 [ext_resource type="Script" path="res://player.gd" id="1_tr1ts"]
-[ext_resource type="Texture2D" uid="uid://2hcmdchdqex5" path="res://icon.svg" id="3_foos4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_58vjm"]
 radius = 7.0
@@ -96,25 +95,24 @@ _data = {
 script = ExtResource("1_tr1ts")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-visible = false
 texture_filter = 1
-position = Vector2(0, -0.5)
 texture = ExtResource("1_7tahg")
+centered = false
+offset = Vector2(-16, -12)
 hframes = 23
 region_enabled = true
 region_rect = Rect2(0, 73, 736, 23)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(0, -1)
-scale = Vector2(0.166016, 0.164551)
-texture = ExtResource("3_foos4")
-
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_58vjm")
+
+[node name="VisibilityNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1, 0)
+scale = Vector2(0.9, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_tw7gm")
 }
+
+[connection signal="screen_exited" from="VisibilityNotifier" to="." method="on_screen_exited"]
