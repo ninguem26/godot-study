@@ -108,10 +108,10 @@ position = Vector2(72, 40)
 [node name="Star5" parent="." instance=ExtResource("3_qdag4")]
 position = Vector2(144, 16)
 
-[node name="Camera" type="Camera2D" parent="."]
-position = Vector2(192, 16)
-zoom = Vector2(2, 2)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GUI" parent="CanvasLayer" instance=ExtResource("4_k7tx2")]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(192, 16)
+zoom = Vector2(2, 2)
