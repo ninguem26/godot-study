@@ -68,8 +68,10 @@ func input_dir(first_input: String, second_input: String) -> float:
 	return input_1 - input_2
 
 func on_screen_exited():
-	queue_free()
+	if global_position.y > 216:
+		handle_death()
 
 func handle_death():
-	get_tree().change_scene_to_file('res://scene_transition.tscn')
+	print('nova cena')
+	SceneTransition.change_scene('res://scene_transition.tscn')
 	queue_free()
