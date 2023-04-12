@@ -118,6 +118,8 @@ limit_top = 0
 limit_bottom = 216
 position_smoothing_enabled = true
 drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_right_margin = 0.1
 editor_draw_drag_margin = true
 
 [node name="CameraAnchor" type="RemoteTransform2D" parent="."]

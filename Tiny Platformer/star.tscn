@@ -106,6 +106,7 @@ _data = {
 }
 
 [node name="Star" type="Area2D"]
+collision_layer = 4
 script = ExtResource("1_lgdel")
 
 [node name="Sprite" type="Sprite2D" parent="."]

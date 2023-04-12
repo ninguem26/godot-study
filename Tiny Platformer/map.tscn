@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq3v7vtbmivbd"]
+[gd_scene load_steps=8 format=3 uid="uid://bq3v7vtbmivbd"]
 
 [ext_resource type="Texture2D" uid="uid://bi02qb13fmao7" path="res://tileset_dirt_and_grass_1.png" id="1_hr5a8"]
 [ext_resource type="PackedScene" uid="uid://bh4rqdt6xm43i" path="res://player.tscn" id="2_n0dld"]
 [ext_resource type="PackedScene" uid="uid://bybfsyow1uvup" path="res://star.tscn" id="3_qdag4"]
 [ext_resource type="PackedScene" uid="uid://epfmgcr7mtss" path="res://gui.tscn" id="4_k7tx2"]
+[ext_resource type="PackedScene" uid="uid://bhbnaej17q7jp" path="res://spikes.tscn" id="5_i124a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yanv7"]
 texture = ExtResource("1_hr5a8")
@@ -84,13 +85,14 @@ texture = ExtResource("1_hr5a8")
 4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_fxs37"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_yanv7")
 
 [node name="Map" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_n0dld")]
 position = Vector2(40, 126)
+collision_mask = 2
 floor_constant_speed = true
 floor_snap_length = 4.0
 
@@ -130,3 +132,9 @@ position = Vector2(144, 110)
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(192, 110)
 enabled = false
+
+[node name="Spikes2" parent="." instance=ExtResource("5_i124a")]
+position = Vector2(456, 144)
+
+[node name="Spikes" parent="." instance=ExtResource("5_i124a")]
+position = Vector2(440, 144)

@@ -1,7 +1,13 @@
 extends CharacterBody2D
 
 @export var acceleration: float = 0.5
-@export var friction: float = 0.75
+@export var air_friction: float = 0.1
+@export var friction: float = 0.75:
+	get:
+		if is_on_floor():
+			return friction
+		else:
+			return air_friction
 @export var jump_offset: float = 0.1
 
 @export var move_speed: float = 120.0
@@ -9,7 +15,12 @@ extends CharacterBody2D
 @export var jump_release_velocity: float = -75.0
 @export var gravity: float = 980.0
 
+var damagged: bool = false
+
 var current_direction: int = 1
+
+var damage_cooldown_timer: SceneTreeTimer
+var damage_cooldown: float = 0.5
 
 var jump_offset_timer: SceneTreeTimer
 var in_jump_offset: bool = false
@@ -17,6 +28,7 @@ var in_jump_offset: bool = false
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
+	damage_cooldown_timer = get_tree().create_timer(0)
 	jump_offset_timer = get_tree().create_timer(jump_offset)
 	jump_offset_timer.connect("timeout", reset_jump_offset_timer)
 	
@@ -31,30 +43,37 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var dir: int = int(input_dir(InputKeys.MOVE_RIGHT, InputKeys.MOVE_LEFT))
 	
-	if dir:
-		if dir != 0 and dir != current_direction:
-			current_direction = dir
-			scale.x *= -1
+	if not damagged:
+		if dir:
+			if dir != 0 and dir != current_direction:
+				current_direction = dir
+				scale.x *= -1
+			
+			animation_player.play("run")
+			velocity.x = lerp(velocity.x, move_speed * dir, acceleration)
+		else:
+			if is_on_floor():
+				animation_player.play("idle")
+			
+			velocity.x = lerp(velocity.x, 0.0, friction)
 		
-		animation_player.play("run")
-		velocity.x = lerp(velocity.x, move_speed * dir, acceleration)
+		# Handle Jump.
+		if Input.is_action_just_pressed(InputKeys.JUMP):
+			in_jump_offset = true
+			jump_offset_timer = get_tree().create_timer(jump_offset)
+		if Input.is_action_just_released(InputKeys.JUMP):
+			if velocity.y < jump_release_velocity:
+				velocity.y = jump_release_velocity
+		
+		if is_on_floor() and in_jump_offset and jump_offset_timer.get_time_left() > 0:
+			animation_player.play("jump")
+			velocity.y = jump_velocity
+			in_jump_offset = false
 	else:
-		if is_on_floor():
-			animation_player.play("idle")
-		velocity.x = lerp(velocity.x, 0.0, friction)
-	
-	# Handle Jump.
-	if Input.is_action_just_pressed(InputKeys.JUMP):
-		in_jump_offset = true
-		jump_offset_timer = get_tree().create_timer(jump_offset)
-	if Input.is_action_just_released(InputKeys.JUMP):
-		if velocity.y < jump_release_velocity:
-			velocity.y = jump_release_velocity
-	
-	if is_on_floor() and in_jump_offset and jump_offset_timer.get_time_left() > 0:
-		animation_player.play("jump")
-		velocity.y = jump_velocity
-		in_jump_offset = false
+		velocity.x = lerp(velocity.x, 0.0, 0.05)
+		
+		if is_on_floor() && damage_cooldown_timer.time_left <= 0:
+			damagged = false
 
 	move_and_slide()
 
@@ -72,6 +91,10 @@ func on_screen_exited():
 		handle_death()
 
 func handle_death():
-	print('nova cena')
-	SceneTransition.change_scene('res://scene_transition.tscn')
+	SceneTransition.change_scene('res://map.tscn')
 	queue_free()
+
+func get_hit(base_position):
+	damage_cooldown_timer = get_tree().create_timer(damage_cooldown)
+	damagged = true
+	velocity = -global_position.direction_to(base_position) * 300
