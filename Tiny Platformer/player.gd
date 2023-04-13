@@ -32,7 +32,7 @@ func _ready():
 	jump_offset_timer = get_tree().create_timer(jump_offset)
 	jump_offset_timer.connect("timeout", reset_jump_offset_timer)
 	
-	animation_player.play("idle")
+	reset_animation()
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -53,7 +53,7 @@ func _physics_process(delta):
 			velocity.x = lerp(velocity.x, move_speed * dir, acceleration)
 		else:
 			if is_on_floor():
-				animation_player.play("idle")
+				reset_animation()
 			
 			velocity.x = lerp(velocity.x, 0.0, friction)
 		
@@ -95,6 +95,10 @@ func handle_death():
 	queue_free()
 
 func get_hit(base_position):
+	animation_player.play('damagged')
 	damage_cooldown_timer = get_tree().create_timer(damage_cooldown)
 	damagged = true
 	velocity = -global_position.direction_to(base_position) * 300
+
+func reset_animation():
+	animation_player.play('RESET')
