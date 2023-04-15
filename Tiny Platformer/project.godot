@@ -34,10 +34,11 @@ window/dpi/allow_hidpi=false
 
 [layer_names]
 
-2d_physics/layer_1="player"
+2d_physics/layer_1="player_static"
 2d_physics/layer_2="tilemap"
 2d_physics/layer_3="collectable"
 2d_physics/layer_4="damageable"
+2d_physics/layer_5="player_dynamic"
 
 [rendering]
 

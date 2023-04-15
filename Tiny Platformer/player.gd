@@ -19,16 +19,21 @@ var damagged: bool = false
 
 var current_direction: int = 1
 
-var damage_cooldown_timer: SceneTreeTimer
-var damage_cooldown: float = 0.5
+var damage_cooldown: float = 2
 
-var jump_offset_timer: SceneTreeTimer
 var in_jump_offset: bool = false
 
+# Timers
+var damage_cooldown_timer: SceneTreeTimer
+var jump_offset_timer: SceneTreeTimer
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var effect_player: AnimationPlayer = $EffectPlayer
 
 func _ready():
 	damage_cooldown_timer = get_tree().create_timer(0)
+	damage_cooldown_timer.connect("timeout", reset_damage_cooldown_timer)
+	
 	jump_offset_timer = get_tree().create_timer(jump_offset)
 	jump_offset_timer.connect("timeout", reset_jump_offset_timer)
 	
@@ -72,13 +77,17 @@ func _physics_process(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, 0.05)
 		
-		if is_on_floor() && damage_cooldown_timer.time_left <= 0:
+		if is_on_floor() && damage_cooldown_timer.time_left < 1.75:
 			damagged = false
 
 	move_and_slide()
 
 func reset_jump_offset_timer():
 	in_jump_offset = false
+
+func reset_damage_cooldown_timer():
+	damagged = false
+	set_collision_layer_value(5, true)
 
 func input_dir(first_input: String, second_input: String) -> float:
 	var input_1: float = Input.get_action_strength(first_input)
@@ -95,9 +104,11 @@ func handle_death():
 	queue_free()
 
 func get_hit(base_position):
-	animation_player.play('damagged')
-	damage_cooldown_timer = get_tree().create_timer(damage_cooldown)
+	effect_player.play('hit')
+	set_collision_layer_value(5, false)
 	damagged = true
+	damage_cooldown_timer = get_tree().create_timer(damage_cooldown)
+	damage_cooldown_timer.connect("timeout", reset_damage_cooldown_timer)
 	velocity = -global_position.direction_to(base_position) * 300
 
 func reset_animation():
