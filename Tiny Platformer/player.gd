@@ -23,6 +23,19 @@ var damage_cooldown: float = 2
 
 var in_jump_offset: bool = false
 
+# Player's Health
+
+var max_health: int = 3
+var current_health: int = max_health:
+	set(value):
+		if value > max_health:
+			current_health = max_health
+		elif value <= 0:
+			current_health = 0
+			handle_death()
+		else:
+			current_health = value
+
 # Timers
 var damage_cooldown_timer: SceneTreeTimer
 var jump_offset_timer: SceneTreeTimer
@@ -103,13 +116,15 @@ func handle_death():
 	SceneTransition.change_scene('res://map.tscn')
 	queue_free()
 
-func get_hit(base_position):
-	effect_player.play('hit')
-	set_collision_layer_value(5, false)
-	damagged = true
-	damage_cooldown_timer = get_tree().create_timer(damage_cooldown)
-	damage_cooldown_timer.connect("timeout", reset_damage_cooldown_timer)
-	velocity = -global_position.direction_to(base_position) * 300
+func get_hit(base_position, damage):
+	if not damage_cooldown_timer.time_left > 0:
+		effect_player.play('hit')
+		set_collision_layer_value(5, false)
+		damagged = true
+		damage_cooldown_timer = get_tree().create_timer(damage_cooldown)
+		damage_cooldown_timer.connect("timeout", reset_damage_cooldown_timer)
+		velocity = -global_position.direction_to(base_position) * 300
+		current_health -= damage
 
 func reset_animation():
 	animation_player.play('RESET')
