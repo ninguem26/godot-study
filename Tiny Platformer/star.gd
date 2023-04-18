@@ -8,7 +8,7 @@ extends Area2D
 var TW: Tween
 var TW2: Tween
 
-func _ready():
+func _ready() -> void:
 	TW = create_tween().set_loops()
 	TW2 = create_tween().set_loops().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
@@ -22,7 +22,7 @@ func _ready():
 	TW2.tween_property(sprite, 'position', Vector2(0, 2.5), 1)
 	TW2.tween_property(sprite, 'position', Vector2(0, -1.5), 1)
 
-func on_body_entered(_body):
+func on_body_entered(_body) -> void:
 	EventBus.emit_signal("on_collected_item", value)
 	
 	TW.stop()

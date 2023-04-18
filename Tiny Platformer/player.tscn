@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bh4rqdt6xm43i"]
+[gd_scene load_steps=16 format=3 uid="uid://bh4rqdt6xm43i"]
 
 [ext_resource type="Texture2D" uid="uid://coi51ymyxt3l" path="res://characters.png" id="1_7tahg"]
 [ext_resource type="Script" path="res://player.gd" id="1_tr1ts"]
 [ext_resource type="Shader" path="res://player.gdshader" id="2_aonuk"]
+[ext_resource type="PackedScene" uid="uid://btj2lhcnex7g0" path="res://health_component.tscn" id="4_cb610"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tiy3f"]
 resource_local_to_scene = true
@@ -224,4 +225,7 @@ libraries = {
 "": SubResource("AnimationLibrary_4jvdy")
 }
 
+[node name="HealthComponent" parent="." instance=ExtResource("4_cb610")]
+
 [connection signal="screen_exited" from="VisibilityNotifier" to="." method="on_screen_exited"]
+[connection signal="health_down_to_zero" from="HealthComponent" to="." method="on_health_down_to_zero"]

@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export var acceleration: float = 0.5
@@ -23,27 +24,15 @@ var damage_cooldown: float = 2
 
 var in_jump_offset: bool = false
 
-# Player's Health
-
-var max_health: int = 3
-var current_health: int = max_health:
-	set(value):
-		if value > max_health:
-			current_health = max_health
-		elif value <= 0:
-			current_health = 0
-			handle_death()
-		else:
-			current_health = value
-
 # Timers
 var damage_cooldown_timer: SceneTreeTimer
 var jump_offset_timer: SceneTreeTimer
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var effect_player: AnimationPlayer = $EffectPlayer
+@onready var health_component: HealthComponent = $HealthComponent
 
-func _ready():
+func _ready() -> void:
 	damage_cooldown_timer = get_tree().create_timer(0)
 	damage_cooldown_timer.connect("timeout", reset_damage_cooldown_timer)
 	
@@ -52,7 +41,7 @@ func _ready():
 	
 	reset_animation()
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -92,13 +81,13 @@ func _physics_process(delta):
 		
 		if is_on_floor() && damage_cooldown_timer.time_left < 1.75:
 			damagged = false
-
+	
 	move_and_slide()
 
-func reset_jump_offset_timer():
+func reset_jump_offset_timer() -> void:
 	in_jump_offset = false
 
-func reset_damage_cooldown_timer():
+func reset_damage_cooldown_timer() -> void:
 	damagged = false
 	set_collision_layer_value(5, true)
 
@@ -108,15 +97,15 @@ func input_dir(first_input: String, second_input: String) -> float:
 	
 	return input_1 - input_2
 
-func on_screen_exited():
+func on_screen_exited() -> void:
 	if global_position.y > 216:
 		handle_death()
 
-func handle_death():
+func handle_death() -> void:
 	SceneTransition.change_scene('res://map.tscn')
 	queue_free()
 
-func get_hit(base_position, damage):
+func get_hit(base_position, damage) -> void:
 	if not damage_cooldown_timer.time_left > 0:
 		effect_player.play('hit')
 		set_collision_layer_value(5, false)
@@ -124,7 +113,10 @@ func get_hit(base_position, damage):
 		damage_cooldown_timer = get_tree().create_timer(damage_cooldown)
 		damage_cooldown_timer.connect("timeout", reset_damage_cooldown_timer)
 		velocity = -global_position.direction_to(base_position) * 300
-		current_health -= damage
+		health_component.current_health -= damage
 
-func reset_animation():
+func reset_animation() -> void:
 	animation_player.play('RESET')
+
+func on_health_down_to_zero() -> void:
+	handle_death()
