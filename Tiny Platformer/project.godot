@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Tiny Platformer"
 run/main_scene="res://map.tscn"
-config/features=PackedStringArray("4.0", "Forward Plus")
+config/features=PackedStringArray("4.1", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.png"
 
@@ -27,6 +27,7 @@ SceneTransition="*res://scene_transition.tscn"
 
 window/size/viewport_width=384
 window/size/viewport_height=216
+window/size/mode=3
 window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="viewport"

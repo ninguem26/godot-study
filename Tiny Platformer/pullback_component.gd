@@ -18,11 +18,11 @@ func _ready():
 func apply_force(base_position: Vector2, effect = null):
 	if effect != null:
 		effect.call()
-	
+
 	if can_be_invicible:
 		set_layers(false)
 		is_invincible = true
-	
+
 	start_timer(invincibility_cooldown)
 	target.velocity = -target.global_position.direction_to(base_position) * magnitude
 
