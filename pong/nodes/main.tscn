@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1siy4tqi26d0"]
+
+[ext_resource type="PackedScene" uid="uid://b7t5au1bve8ro" path="res://nodes/paddle.tscn" id="1_eux57"]
+[ext_resource type="PackedScene" uid="uid://cptojpjg7d6jm" path="res://nodes/horizontal_wall.tscn" id="2_vb2a8"]
+[ext_resource type="PackedScene" uid="uid://wr0wxtydqoie" path="res://nodes/vertical_wall.tscn" id="3_npbde"]
+[ext_resource type="PackedScene" uid="uid://b1uv58ufxqo71" path="res://nodes/ball.tscn" id="4_w1as6"]
+
+[node name="Main" type="Node"]
+
+[node name="Paddle" parent="." instance=ExtResource("1_eux57")]
+position = Vector2(126, 308)
+
+[node name="HorizontalWall" parent="." instance=ExtResource("2_vb2a8")]
+position = Vector2(320, -10)
+
+[node name="HorizontalWall2" parent="." instance=ExtResource("2_vb2a8")]
+position = Vector2(320, 370)
+
+[node name="VerticalWall" parent="." instance=ExtResource("3_npbde")]
+position = Vector2(-10, 180)
+
+[node name="VerticalWall2" parent="." instance=ExtResource("3_npbde")]
+position = Vector2(650, 180)
+
+[node name="Ball" parent="." instance=ExtResource("4_w1as6")]
+position = Vector2(318, 188)
