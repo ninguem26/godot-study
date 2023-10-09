@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1siy4tqi26d0"]
+[gd_scene load_steps=8 format=3 uid="uid://d1siy4tqi26d0"]
 
 [ext_resource type="PackedScene" uid="uid://b7t5au1bve8ro" path="res://nodes/paddle.tscn" id="1_eux57"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_fgryf"]
 [ext_resource type="PackedScene" uid="uid://cptojpjg7d6jm" path="res://nodes/horizontal_wall.tscn" id="2_vb2a8"]
 [ext_resource type="PackedScene" uid="uid://wr0wxtydqoie" path="res://nodes/vertical_wall.tscn" id="3_npbde"]
 [ext_resource type="PackedScene" uid="uid://b1uv58ufxqo71" path="res://nodes/ball.tscn" id="4_w1as6"]
+[ext_resource type="PackedScene" uid="uid://72mjhq8du8y6" path="res://nodes/paddle_ai.tscn" id="5_1jsp7"]
+[ext_resource type="PackedScene" uid="uid://bhevwwuu6sbxi" path="res://nodes/line.tscn" id="6_o0qm2"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_fgryf")
 
 [node name="Paddle" parent="." instance=ExtResource("1_eux57")]
-position = Vector2(126, 308)
+position = Vector2(64, 180)
 
 [node name="HorizontalWall" parent="." instance=ExtResource("2_vb2a8")]
 position = Vector2(320, -10)
@@ -22,5 +26,14 @@ position = Vector2(-10, 180)
 [node name="VerticalWall2" parent="." instance=ExtResource("3_npbde")]
 position = Vector2(650, 180)
 
-[node name="Ball" parent="." instance=ExtResource("4_w1as6")]
-position = Vector2(318, 188)
+[node name="Ball" parent="." node_paths=PackedStringArray("paddle_left", "paddle_right") instance=ExtResource("4_w1as6")]
+position = Vector2(320, 180)
+paddle_left = NodePath("../Paddle")
+paddle_right = NodePath("../PaddleAI")
+
+[node name="PaddleAI" parent="." node_paths=PackedStringArray("ball") instance=ExtResource("5_1jsp7")]
+position = Vector2(576, 180)
+ball = NodePath("../Ball")
+
+[node name="Line" parent="." instance=ExtResource("6_o0qm2")]
+position = Vector2(320, 126)

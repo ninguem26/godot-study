@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://player.gd" id="1_tr1ts"]
 [ext_resource type="Shader" path="res://player.gdshader" id="2_aonuk"]
 [ext_resource type="PackedScene" uid="uid://btj2lhcnex7g0" path="res://health_component.tscn" id="4_cb610"]
-[ext_resource type="PackedScene" uid="uid://b04iiej313du4" path="res://pullback_component.tscn" id="5_yg1q3"]
+[ext_resource type="PackedScene" path="res://pullback_component.tscn" id="5_yg1q3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tiy3f"]
 resource_local_to_scene = true
