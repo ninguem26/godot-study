@@ -1,14 +1,19 @@
 extends CharacterBody2D
 
-@export var paddle_left: CharacterBody2D
-@export var paddle_right: CharacterBody2D
+var window_width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
 
-var speed: Vector2 = Vector2(-150.0, 150.0)
+var speed: Vector2 = Vector2(150.0, 150.0)
+var margin_size: int = 64
+var can_move: bool = false
 
-func _physics_process(delta: float) -> void:
+func _ready() -> void:
+	visible = false
+
+func _physics_process(_delta: float) -> void:
 	velocity = speed
 	
-	move_and_slide()
+	if can_move:
+		move_and_slide()
 	var collision: KinematicCollision2D = get_last_slide_collision()
 	
 	if collision != null:
@@ -20,12 +25,21 @@ func _physics_process(delta: float) -> void:
 		if normal.y != 0:
 			speed.y *= -1
 	
-	if position.x < paddle_left.position.x:
-		queue_free()
+	if (position.x > window_width - margin_size):
+		destroy(1)
 	
-	if position.x > paddle_right.position.x:
-		queue_free()
+	if position.x < margin_size:
+		destroy(-1)
+
+func destroy(new_ball_dir: int) -> void:
+	get_parent().instantiate_ball(new_ball_dir)
+	get_parent().update_score(new_ball_dir)
+	queue_free()
 
 func on_area_body_entered(body: Node2D) -> void:
 	if body.name == "Paddle":
 		speed *= 1.05
+
+func on_timer_timeout() -> void:
+	visible = true
+	can_move = true
