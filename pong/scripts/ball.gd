@@ -11,23 +11,23 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	velocity = speed
-	
+
 	if can_move:
 		move_and_slide()
 	var collision: KinematicCollision2D = get_last_slide_collision()
-	
+
 	if collision != null:
 		var normal: Vector2 = collision.get_normal()
-		
+
 		if normal.x != 0:
 			speed.x *= -1
-		
+
 		if normal.y != 0:
 			speed.y *= -1
-	
+
 	if (position.x > window_width - margin_size):
 		destroy(1)
-	
+
 	if position.x < margin_size:
 		destroy(-1)
 

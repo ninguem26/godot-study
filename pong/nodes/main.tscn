@@ -39,6 +39,7 @@ offset_bottom = 40.0
 
 [node name="P2Score" type="RichTextLabel" parent="Control"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 460.0
 offset_top = 20.0
 offset_right = 500.0
@@ -48,6 +49,7 @@ scroll_active = false
 
 [node name="P1Score" type="RichTextLabel" parent="Control"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 140.0
 offset_top = 20.0
 offset_right = 180.0
