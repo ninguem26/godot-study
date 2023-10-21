@@ -1,8 +1,10 @@
 extends Node
 
-@onready var paddle_ai: CharacterBody2D = get_node('PaddleAI')
-@onready var p1_score_ui: RichTextLabel = get_node('Control/P1Score')
-@onready var p2_score_ui: RichTextLabel = get_node('Control/P2Score')
+@onready var game: Node = get_node('Game')
+@onready var paddle_ai: CharacterBody2D = get_node('Game/PaddleAI')
+@onready var pause_menu: Control
+@onready var p1_score_ui: RichTextLabel
+@onready var p2_score_ui: RichTextLabel
 
 var ball: Resource = load("res://nodes/ball.tscn")
 
@@ -10,13 +12,22 @@ var p1_score: int = 0
 var p2_score: int = 0
 
 func _ready() -> void:
-	p1_score_ui = get_node('Control/P1Score')
-	p2_score_ui = get_node('Control/P2Score')
+	pause_menu = get_node('PauseMenu')
+	pause_menu.visible = false
+	
+	p1_score_ui = get_node('UI/P1Score')
+	p2_score_ui = get_node('UI/P2Score')
 
 	p1_score_ui.text = "[center]%s[/center]" % p1_score
 	p2_score_ui.text = "[center]%s[/center]" % p2_score
 
 	instantiate_ball(-1)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed('ui_cancel') && !get_tree().paused:
+		get_tree().paused = true
+		pause_menu.visible = true
+		pause_menu.set_process(true)
 
 func instantiate_ball(dir: int) -> void:
 	var ball_instance: CharacterBody2D = ball.instantiate()
@@ -24,7 +35,7 @@ func instantiate_ball(dir: int) -> void:
 	ball_instance.speed.x *= dir
 	paddle_ai.ball = ball_instance
 
-	add_child(ball_instance)
+	game.add_child(ball_instance)
 
 func update_score(player_scoring: int) -> void:
 	if player_scoring < 0:

@@ -32,8 +32,9 @@ func _physics_process(_delta: float) -> void:
 		destroy(-1)
 
 func destroy(new_ball_dir: int) -> void:
-	get_parent().instantiate_ball(new_ball_dir)
-	get_parent().update_score(new_ball_dir)
+	var main_node = get_tree().get_root().get_child(0)
+	main_node.instantiate_ball(new_ball_dir)
+	main_node.update_score(new_ball_dir)
 	queue_free()
 
 func on_area_body_entered(body: Node2D) -> void:
