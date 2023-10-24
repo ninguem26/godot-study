@@ -38,7 +38,7 @@ func _ready() -> void:
 
 	instantiate_ball(-1)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed('ui_cancel') && !get_tree().paused:
 		transition_to_menu(pause_menu)
 	
