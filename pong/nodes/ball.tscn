@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1uv58ufxqo71"]
+[gd_scene load_steps=7 format=3 uid="uid://b1uv58ufxqo71"]
 
 [ext_resource type="Script" path="res://scripts/ball.gd" id="1_6ih6t"]
 [ext_resource type="Texture2D" uid="uid://c1jugjccl2h4e" path="res://assets/white.png" id="1_l7bqr"]
+[ext_resource type="AudioStream" uid="uid://c3vxtv7lt4o2w" path="res://assets/sounds/knock-paddle.wav" id="3_r788q"]
+[ext_resource type="AudioStream" uid="uid://cyp0pc76hi1rx" path="res://assets/sounds/knock.wav" id="4_0xhvj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5jmmd"]
 size = Vector2(8, 8)
@@ -28,6 +30,14 @@ shape = SubResource("RectangleShape2D_giu1y")
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="AudioEffects" type="Node" parent="."]
+
+[node name="KnockPaddle" type="AudioStreamPlayer" parent="AudioEffects"]
+stream = ExtResource("3_r788q")
+
+[node name="KnockWall" type="AudioStreamPlayer" parent="AudioEffects"]
+stream = ExtResource("4_0xhvj")
 
 [connection signal="body_entered" from="Area" to="." method="on_area_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="on_timer_timeout"]

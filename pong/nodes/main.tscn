@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1siy4tqi26d0"]
+[gd_scene load_steps=14 format=3 uid="uid://d1siy4tqi26d0"]
 
 [ext_resource type="PackedScene" uid="uid://b7t5au1bve8ro" path="res://nodes/paddle.tscn" id="1_eux57"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_fgryf"]
@@ -8,6 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://bhevwwuu6sbxi" path="res://nodes/line.tscn" id="6_o0qm2"]
 [ext_resource type="PackedScene" uid="uid://bwkcf1c8fvvjv" path="res://nodes/pause_menu.tscn" id="7_grbso"]
 [ext_resource type="PackedScene" uid="uid://b2lyskvbyjjao" path="res://nodes/options_menu.tscn" id="8_u3pbj"]
+[ext_resource type="AudioStream" uid="uid://ci5k1n1hbdsil" path="res://assets/sounds/goal-a.wav" id="9_giipq"]
+[ext_resource type="PackedScene" uid="uid://betogqa3rav0c" path="res://nodes/end_game_menu.tscn" id="9_l31h6"]
+[ext_resource type="AudioStream" uid="uid://d3e2eoathljxf" path="res://assets/sounds/goal-b.wav" id="10_eo7xe"]
+[ext_resource type="AudioStream" uid="uid://br2m2hrmrqdm3" path="res://assets/sounds/lost.wav" id="11_mvxwk"]
+[ext_resource type="AudioStream" uid="uid://d4ak8kbst6fxt" path="res://assets/sounds/won.wav" id="12_im6p1"]
 
 [node name="Main" type="Node"]
 process_mode = 3
@@ -64,6 +69,7 @@ bbcode_enabled = true
 scroll_active = false
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("options_menu") instance=ExtResource("7_grbso")]
+visible = false
 offset_left = 320.0
 offset_top = 180.0
 offset_right = 320.0
@@ -71,8 +77,30 @@ offset_bottom = 180.0
 options_menu = NodePath("../OptionsMenu")
 
 [node name="OptionsMenu" parent="." node_paths=PackedStringArray("previous_menu") instance=ExtResource("8_u3pbj")]
+visible = false
 offset_left = 320.0
 offset_top = 180.0
 offset_right = 320.0
 offset_bottom = 180.0
 previous_menu = NodePath("../PauseMenu")
+
+[node name="EndGameMenu" parent="." instance=ExtResource("9_l31h6")]
+visible = false
+offset_left = 320.0
+offset_top = 180.0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="AudioEffects" type="Node" parent="."]
+
+[node name="GoalA" type="AudioStreamPlayer" parent="AudioEffects"]
+stream = ExtResource("9_giipq")
+
+[node name="GoalB" type="AudioStreamPlayer" parent="AudioEffects"]
+stream = ExtResource("10_eo7xe")
+
+[node name="Lost" type="AudioStreamPlayer" parent="AudioEffects"]
+stream = ExtResource("11_mvxwk")
+
+[node name="Won" type="AudioStreamPlayer" parent="AudioEffects"]
+stream = ExtResource("12_im6p1")

@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@onready var knock_paddle: AudioStreamPlayer = $AudioEffects/KnockPaddle
+@onready var knock_wall: AudioStreamPlayer = $AudioEffects/KnockWall
+
 var window_width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
 
 var speed: Vector2 = Vector2(150.0, 150.0)
@@ -11,30 +14,34 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	velocity = speed
-
+	
 	if can_move:
 		move_and_slide()
+	
 	var collision: KinematicCollision2D = get_last_slide_collision()
-
+	
 	if collision != null:
 		var normal: Vector2 = collision.get_normal()
-
+		
 		if normal.x != 0:
 			speed.x *= -1
-
+		
 		if normal.y != 0:
 			speed.y *= -1
+		
+		if collision.get_collider() is CharacterBody2D:
+			knock_paddle.play()
+		else:
+			knock_wall.play()
 
-	if (position.x > window_width - margin_size):
+	if position.x > window_width - margin_size:
 		destroy(1)
 
 	if position.x < margin_size:
 		destroy(-1)
 
 func destroy(new_ball_dir: int) -> void:
-	var main_node = get_tree().get_root().get_child(0)
-	main_node.instantiate_ball(new_ball_dir)
-	main_node.update_score(new_ball_dir)
+	EventBus.goal_scored.emit(new_ball_dir)
 	queue_free()
 
 func on_area_body_entered(body: Node2D) -> void:
