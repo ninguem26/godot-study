@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://d1siy4tqi26d0"]
+
+[ext_resource type="PackedScene" uid="uid://b7t5au1bve8ro" path="res://nodes/paddle.tscn" id="1_eux57"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_fgryf"]
+[ext_resource type="PackedScene" uid="uid://cptojpjg7d6jm" path="res://nodes/horizontal_wall.tscn" id="2_vb2a8"]
+[ext_resource type="PackedScene" uid="uid://wr0wxtydqoie" path="res://nodes/vertical_wall.tscn" id="3_npbde"]
+[ext_resource type="PackedScene" uid="uid://bwkcf1c8fvvjv" path="res://nodes/pause_menu.tscn" id="7_grbso"]
+[ext_resource type="PackedScene" uid="uid://b2lyskvbyjjao" path="res://nodes/options_menu.tscn" id="8_u3pbj"]
+[ext_resource type="AudioStream" uid="uid://ci5k1n1hbdsil" path="res://assets/sounds/goal-a.wav" id="9_giipq"]
+[ext_resource type="PackedScene" uid="uid://betogqa3rav0c" path="res://nodes/end_game_menu.tscn" id="9_l31h6"]
+[ext_resource type="AudioStream" uid="uid://d3e2eoathljxf" path="res://assets/sounds/goal-b.wav" id="10_eo7xe"]
+[ext_resource type="AudioStream" uid="uid://br2m2hrmrqdm3" path="res://assets/sounds/lost.wav" id="11_mvxwk"]
+[ext_resource type="AudioStream" uid="uid://d4ak8kbst6fxt" path="res://assets/sounds/won.wav" id="12_im6p1"]
+
+[node name="Main" type="Node"]
+process_mode = 3
+script = ExtResource("1_fgryf")
+
+[node name="Game" type="Node" parent="."]
+process_mode = 1
+
+[node name="Paddle" parent="Game" instance=ExtResource("1_eux57")]
+position = Vector2(320, 320)
+
+[node name="HorizontalWall" parent="Game" instance=ExtResource("2_vb2a8")]
+position = Vector2(320, -10)
+
+[node name="HorizontalWall2" parent="Game" instance=ExtResource("2_vb2a8")]
+position = Vector2(320, 370)
+
+[node name="VerticalWall" parent="Game" instance=ExtResource("3_npbde")]
+position = Vector2(150, 180)
+
+[node name="VerticalWall2" parent="Game" instance=ExtResource("3_npbde")]
+position = Vector2(490, 180)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="P2Score" type="RichTextLabel" parent="UI"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 460.0
+offset_top = 20.0
+offset_right = 500.0
+offset_bottom = 60.0
+bbcode_enabled = true
+scroll_active = false
+
+[node name="P1Score" type="RichTextLabel" parent="UI"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 140.0
+offset_top = 20.0
+offset_right = 180.0
+offset_bottom = 60.0
+bbcode_enabled = true
+scroll_active = false
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("options_menu") instance=ExtResource("7_grbso")]
+visible = false
+offset_left = 320.0
+offset_top = 180.0
+offset_right = 320.0
+offset_bottom = 180.0
+options_menu = NodePath("../OptionsMenu")
+
+[node name="OptionsMenu" parent="." node_paths=PackedStringArray("previous_menu") instance=ExtResource("8_u3pbj")]
+visible = false
+offset_left = 320.0
+offset_top = 180.0
+offset_right = 320.0
+offset_bottom = 180.0
+previous_menu = NodePath("../PauseMenu")
+
+[node name="EndGameMenu" parent="." instance=ExtResource("9_l31h6")]
+visible = false
+offset_left = 320.0
+offset_top = 180.0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="AudioEffects" type="Node" parent="."]
+
+[node name="GoalA" type="AudioStreamPlayer" parent="AudioEffects"]
+stream = ExtResource("9_giipq")
+
+[node name="GoalB" type="AudioStreamPlayer" parent="AudioEffects"]
+stream = ExtResource("10_eo7xe")
+
+[node name="Lost" type="AudioStreamPlayer" parent="AudioEffects"]
+stream = ExtResource("11_mvxwk")
+
+[node name="Won" type="AudioStreamPlayer" parent="AudioEffects"]
+stream = ExtResource("12_im6p1")

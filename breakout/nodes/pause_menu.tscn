@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwkcf1c8fvvjv"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_bbbmk"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_bbbmk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -93.5
+offset_right = 57.0
+offset_bottom = 93.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][b]PAUSE[/b][/center]"
+fit_content = true
+shortcut_keys_enabled = false
+
+[node name="ResumeButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Restart Game"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="button_up" from="VBoxContainer/ResumeButton" to="." method="on_resume_button_button_up"]
+[connection signal="button_up" from="VBoxContainer/RestartButton" to="." method="on_restart_button_button_up"]
+[connection signal="button_up" from="VBoxContainer/OptionsButton" to="." method="on_options_button_button_up"]
+[connection signal="button_up" from="VBoxContainer/QuitButton" to="." method="on_quit_button_button_up"]

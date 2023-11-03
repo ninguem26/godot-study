@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7hbwt52bocus"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_r5kja"]
+[ext_resource type="PackedScene" uid="uid://b2lyskvbyjjao" path="res://nodes/options_menu.tscn" id="2_48kuo"]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_r5kja")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="RichTextLabel" parent="Control/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][b]PONG![/b][/center]"
+fit_content = true
+shortcut_keys_enabled = false
+
+[node name="StartButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="OptionsButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="OptionsMenu" parent="." node_paths=PackedStringArray("previous_menu") instance=ExtResource("2_48kuo")]
+process_mode = 0
+offset_left = 272.0
+offset_top = 201.0
+offset_right = 368.0
+offset_bottom = 201.0
+previous_menu = NodePath("../Control")
+
+[connection signal="button_up" from="Control/VBoxContainer/StartButton" to="." method="on_start_button_button_up"]
+[connection signal="button_up" from="Control/VBoxContainer/OptionsButton" to="." method="on_options_button_button_up"]
+[connection signal="button_up" from="Control/VBoxContainer/QuitButton" to="." method="on_quit_button_button_up"]
