@@ -57,8 +57,8 @@ func mark_score(dir: int) -> void:
 
 func instantiate_ball(dir: int) -> void:
 	var ball_instance: CharacterBody2D = ball.instantiate()
-	ball_instance.position = Vector2(320, randi() % 288 + 32)
-	ball_instance.speed.x *= dir
+	ball_instance.position = Vector2(320, 300)
+	ball_instance.dir.x *= dir
 	
 	game.add_child(ball_instance)
 

@@ -1,3 +1,4 @@
+class_name Paddle
 extends CharacterBody2D
 
 const SPEED = 150.0

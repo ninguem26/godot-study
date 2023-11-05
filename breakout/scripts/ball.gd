@@ -5,15 +5,20 @@ extends CharacterBody2D
 
 var window_width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
 
-var speed: Vector2 = Vector2(150.0, 150.0)
+var dir: Vector2 = Vector2(1, 1).normalized()
+var speed: float = 150.0
+var speed_mod: float
 var margin_size: int = 64
 var can_move: bool = false
 
+var force_denominator: int = 40
+
 func _ready() -> void:
+	calculate_speed_modifier(dir)
 	visible = false
 
 func _physics_process(_delta: float) -> void:
-	velocity = speed
+	velocity = dir * (speed + (speed * speed_mod))
 	
 	if can_move:
 		move_and_slide()
@@ -24,13 +29,13 @@ func _physics_process(_delta: float) -> void:
 		var normal: Vector2 = collision.get_normal()
 		
 		if normal.x != 0:
-			speed.x *= -1
+			dir.x *= -1
 		
 		if normal.y != 0:
-			speed.y *= -1
+			dir.y *= -1
 		
 		if collision.get_collider() is CharacterBody2D:
-			knock_paddle.play()
+			handle_paddle_collision(collision.get_collider())
 		else:
 			knock_wall.play()
 
@@ -39,9 +44,23 @@ func destroy(new_ball_dir: int) -> void:
 	queue_free()
 
 func on_area_body_entered(body: Node2D) -> void:
-	if body.name == "Paddle":
+	if body is Block:
+		body.destroy()
+	elif body is Paddle:
 		speed *= 1.05
 
 func on_timer_timeout() -> void:
 	visible = true
 	can_move = true
+
+func handle_paddle_collision(paddle: CharacterBody2D) -> void:
+	var start_pos: Vector2 = paddle.global_position
+	var end_pos: Vector2 = global_position
+	var new_dir: Vector2 = Vector2(end_pos.x - start_pos.x, end_pos.y - start_pos.y)
+	
+	calculate_speed_modifier(new_dir)
+	dir = new_dir.normalized()
+	knock_paddle.play()
+
+func calculate_speed_modifier(direction: Vector2) -> void:
+	speed_mod = abs(cos(direction.angle_to(Vector2(1, 0))))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1siy4tqi26d0"]
+[gd_scene load_steps=13 format=3 uid="uid://d1siy4tqi26d0"]
 
 [ext_resource type="PackedScene" uid="uid://b7t5au1bve8ro" path="res://nodes/paddle.tscn" id="1_eux57"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_fgryf"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://betogqa3rav0c" path="res://nodes/end_game_menu.tscn" id="9_l31h6"]
 [ext_resource type="AudioStream" uid="uid://d3e2eoathljxf" path="res://assets/sounds/goal-b.wav" id="10_eo7xe"]
 [ext_resource type="AudioStream" uid="uid://br2m2hrmrqdm3" path="res://assets/sounds/lost.wav" id="11_mvxwk"]
+[ext_resource type="PackedScene" uid="uid://c15q0ccn0exdb" path="res://nodes/block.tscn" id="12_7p5tq"]
 [ext_resource type="AudioStream" uid="uid://d4ak8kbst6fxt" path="res://assets/sounds/won.wav" id="12_im6p1"]
 
 [node name="Main" type="Node"]
@@ -33,6 +34,30 @@ position = Vector2(150, 180)
 
 [node name="VerticalWall2" parent="Game" instance=ExtResource("3_npbde")]
 position = Vector2(490, 180)
+
+[node name="Block" parent="." instance=ExtResource("12_7p5tq")]
+position = Vector2(304, 192)
+
+[node name="Block2" parent="." instance=ExtResource("12_7p5tq")]
+position = Vector2(336, 192)
+
+[node name="Block3" parent="." instance=ExtResource("12_7p5tq")]
+position = Vector2(304, 184)
+
+[node name="Block4" parent="." instance=ExtResource("12_7p5tq")]
+position = Vector2(336, 184)
+
+[node name="Block5" parent="." instance=ExtResource("12_7p5tq")]
+position = Vector2(304, 176)
+
+[node name="Block6" parent="." instance=ExtResource("12_7p5tq")]
+position = Vector2(336, 176)
+
+[node name="Block7" parent="." instance=ExtResource("12_7p5tq")]
+position = Vector2(304, 168)
+
+[node name="Block8" parent="." instance=ExtResource("12_7p5tq")]
+position = Vector2(336, 168)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
