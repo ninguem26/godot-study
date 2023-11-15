@@ -65,25 +65,43 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="P2Score" type="RichTextLabel" parent="UI"]
+[node name="Score" type="RichTextLabel" parent="UI"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 460.0
-offset_top = 20.0
-offset_right = 500.0
-offset_bottom = 60.0
+offset_left = 520.0
+offset_top = 48.0
+offset_right = 560.0
+offset_bottom = 88.0
 bbcode_enabled = true
+text = "AAAAAAAAAAAA"
 scroll_active = false
 
-[node name="P1Score" type="RichTextLabel" parent="UI"]
+[node name="Health" type="RichTextLabel" parent="UI"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 140.0
-offset_top = 20.0
-offset_right = 180.0
-offset_bottom = 60.0
+offset_left = 520.0
+offset_top = 144.0
+offset_right = 560.0
+offset_bottom = 184.0
 bbcode_enabled = true
+text = "BBBBBBB"
 scroll_active = false
+
+[node name="ScoreLabel" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 8.0
+offset_right = 584.0
+offset_bottom = 48.0
+text = "SCORE"
+
+[node name="HealthLabel" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 104.0
+offset_right = 600.0
+offset_bottom = 144.0
+text = "HEALTH"
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("options_menu") instance=ExtResource("7_grbso")]
 visible = false

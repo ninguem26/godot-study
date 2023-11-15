@@ -17,3 +17,6 @@ texture = ExtResource("1_ptc82")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_44w6y")
+
+[node name="BallRespawn" type="Marker2D" parent="."]
+position = Vector2(0, -12)
