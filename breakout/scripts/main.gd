@@ -62,6 +62,9 @@ func mark_score(value: int) -> void:
 func apply_damage() -> void:
 	health -= 1
 	health_ui.text = "[center]%s[/center]" % health
+	
+	if health >= 0:
+		instantiate_ball()
 
 func instantiate_ball() -> void:
 	var ball_instance: CharacterBody2D = ball.instantiate()
