@@ -30,7 +30,7 @@ theme_override_constants/separation = 10
 [node name="Title" type="RichTextLabel" parent="Control/VBoxContainer"]
 layout_mode = 2
 bbcode_enabled = true
-text = "[center][b]PONG![/b][/center]"
+text = "[center][b]BREAKOUT[/b][/center]"
 fit_content = true
 shortcut_keys_enabled = false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1siy4tqi26d0"]
+[gd_scene load_steps=14 format=3 uid="uid://d1siy4tqi26d0"]
 
 [ext_resource type="PackedScene" uid="uid://b7t5au1bve8ro" path="res://nodes/paddle.tscn" id="1_eux57"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_fgryf"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://br2m2hrmrqdm3" path="res://assets/sounds/lost.wav" id="11_mvxwk"]
 [ext_resource type="PackedScene" uid="uid://c15q0ccn0exdb" path="res://nodes/block.tscn" id="12_7p5tq"]
 [ext_resource type="AudioStream" uid="uid://d4ak8kbst6fxt" path="res://assets/sounds/won.wav" id="12_im6p1"]
+[ext_resource type="Texture2D" uid="uid://btffogcehhfxs" path="res://assets/textures/board.png" id="13_axygv"]
 
 [node name="Main" type="Node"]
 process_mode = 3
@@ -24,40 +25,49 @@ process_mode = 1
 position = Vector2(320, 320)
 
 [node name="HorizontalWall" parent="Game" instance=ExtResource("2_vb2a8")]
-position = Vector2(320, -10)
+position = Vector2(320, 7)
 
 [node name="HorizontalWall2" parent="Game" instance=ExtResource("2_vb2a8")]
-position = Vector2(320, 370)
+position = Vector2(320, 354)
 
 [node name="VerticalWall" parent="Game" instance=ExtResource("3_npbde")]
-position = Vector2(150, 180)
+position = Vector2(151, 180)
 
 [node name="VerticalWall2" parent="Game" instance=ExtResource("3_npbde")]
 position = Vector2(490, 180)
 
 [node name="Block" parent="." instance=ExtResource("12_7p5tq")]
 position = Vector2(304, 192)
+durability = 3
+color = Vector2(1, 0)
 
 [node name="Block2" parent="." instance=ExtResource("12_7p5tq")]
 position = Vector2(336, 192)
+color = Vector2(1, 1)
 
 [node name="Block3" parent="." instance=ExtResource("12_7p5tq")]
 position = Vector2(304, 184)
+color = Vector2(0, 2)
 
 [node name="Block4" parent="." instance=ExtResource("12_7p5tq")]
 position = Vector2(336, 184)
+color = Vector2(1, 0)
 
 [node name="Block5" parent="." instance=ExtResource("12_7p5tq")]
 position = Vector2(304, 176)
+color = Vector2(1, 2)
 
 [node name="Block6" parent="." instance=ExtResource("12_7p5tq")]
 position = Vector2(336, 176)
+color = Vector2(0, 2)
 
 [node name="Block7" parent="." instance=ExtResource("12_7p5tq")]
 position = Vector2(304, 168)
+color = Vector2(1, 1)
 
 [node name="Block8" parent="." instance=ExtResource("12_7p5tq")]
 position = Vector2(336, 168)
+color = Vector2(1, 2)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -80,9 +90,9 @@ scroll_active = false
 texture_filter = 1
 layout_mode = 0
 offset_left = 520.0
-offset_top = 144.0
+offset_top = 136.0
 offset_right = 560.0
-offset_bottom = 184.0
+offset_bottom = 176.0
 bbcode_enabled = true
 text = "BBBBBBB"
 scroll_active = false
@@ -90,9 +100,9 @@ scroll_active = false
 [node name="ScoreLabel" type="RichTextLabel" parent="UI"]
 layout_mode = 0
 offset_left = 520.0
-offset_top = 8.0
+offset_top = 16.0
 offset_right = 584.0
-offset_bottom = 48.0
+offset_bottom = 56.0
 text = "SCORE"
 
 [node name="HealthLabel" type="RichTextLabel" parent="UI"]
@@ -139,3 +149,8 @@ stream = ExtResource("11_mvxwk")
 
 [node name="Won" type="AudioStreamPlayer" parent="AudioEffects"]
 stream = ExtResource("12_im6p1")
+
+[node name="Board" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 180)
+texture = ExtResource("13_axygv")

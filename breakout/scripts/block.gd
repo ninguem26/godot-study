@@ -1,22 +1,27 @@
 class_name Block
 extends StaticBody2D
 
+@export_group('Behaviour')
 @export var durability: int = 1
 @export var value: int = 10
+@export_group('Style')
+@export var color: Vector2 = Vector2.ZERO
 
-var current_durability: int = durability
+var current_durability: int
 
-# Called when the node enters the scene tree for the first time.
+@onready var sprite: Sprite2D = $Sprite
+
 func _ready() -> void:
-	pass # Replace with function body.
+	sprite.set_region_rect( Rect2(Vector2(32 * color.x, 8 * color.y), Vector2(32, 8)))
+	
+	current_durability = durability
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
 
 func get_hit() -> void:
 	current_durability -= 1
-	
+	print(current_durability)
 	if current_durability <= 0:
 		destroy()
 

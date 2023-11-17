@@ -6,16 +6,18 @@
 [ext_resource type="AudioStream" uid="uid://cyp0pc76hi1rx" path="res://assets/sounds/knock.wav" id="4_0xhvj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5jmmd"]
-size = Vector2(8, 8)
+size = Vector2(6, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_giu1y"]
-size = Vector2(10, 10)
+size = Vector2(8, 8)
 
 [node name="Ball" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_6ih6t")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-1.78814e-07, 2.38419e-07)
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_l7bqr")
 
 [node name="Collider" type="CollisionShape2D" parent="."]

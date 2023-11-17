@@ -1,8 +1,7 @@
 class_name Ball
 extends CharacterBody2D
 
-@onready var knock_paddle: AudioStreamPlayer = $AudioEffects/KnockPaddle
-@onready var knock_wall: AudioStreamPlayer = $AudioEffects/KnockWall
+const MARGIN_BOTTOM: int = 338
 
 var window_width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
 
@@ -11,17 +10,18 @@ var paddle_node: Paddle
 var dir: Vector2 = Vector2(1, 1).normalized()
 var speed: float = 150.0
 var speed_mod: float
-var margin_bottom: int = 352
 var can_move: bool = false
 
 var force_denominator: int = 40
+
+@onready var knock_paddle: AudioStreamPlayer = $AudioEffects/KnockPaddle
+@onready var knock_wall: AudioStreamPlayer = $AudioEffects/KnockWall
 
 func _ready() -> void:
 	calculate_speed_modifier(dir)
 
 func _physics_process(_delta: float) -> void:
 	velocity = dir * (speed + (speed * speed_mod))
-	print(dir)
 	
 	if paddle_node != null && !can_move:
 		global_position = paddle_node.ball_respawn.global_position
@@ -36,7 +36,7 @@ func _physics_process(_delta: float) -> void:
 	if can_move:
 		move_and_slide()
 		
-		if global_position.y >= margin_bottom:
+		if global_position.y >= MARGIN_BOTTOM:
 			destroy()
 	
 	var collision: KinematicCollision2D = get_last_slide_collision()
