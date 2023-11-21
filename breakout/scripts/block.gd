@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 
 func get_hit() -> void:
 	current_durability -= 1
-	print(current_durability)
+	
 	if current_durability <= 0:
 		destroy()
 
