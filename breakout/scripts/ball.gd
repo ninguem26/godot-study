@@ -3,14 +3,14 @@ extends CharacterBody2D
 
 const MARGIN_BOTTOM: int = 338
 
+@export var can_move: bool = false
+
 var window_width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
 
 var paddle_node: Paddle
-
 var dir: Vector2 = Vector2(1, 1).normalized()
 var speed: float = 150.0
 var speed_mod: float
-var can_move: bool = false
 
 var force_denominator: int = 40
 
@@ -64,6 +64,8 @@ func on_area_body_entered(body: Node2D) -> void:
 		body.get_hit()
 	elif body is Paddle:
 		speed *= 1.05
+	elif body is Shield:
+		body.toggle_shield()
 
 func handle_paddle_collision(paddle: CharacterBody2D) -> void:
 	var start_pos: Vector2 = paddle.global_position

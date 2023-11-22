@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d1siy4tqi26d0"]
+[gd_scene load_steps=15 format=3 uid="uid://d1siy4tqi26d0"]
 
 [ext_resource type="PackedScene" uid="uid://b7t5au1bve8ro" path="res://nodes/paddle.tscn" id="1_eux57"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_fgryf"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c15q0ccn0exdb" path="res://nodes/block.tscn" id="12_7p5tq"]
 [ext_resource type="AudioStream" uid="uid://d4ak8kbst6fxt" path="res://assets/sounds/won.wav" id="12_im6p1"]
 [ext_resource type="Texture2D" uid="uid://btffogcehhfxs" path="res://assets/textures/board.png" id="13_axygv"]
+[ext_resource type="PackedScene" uid="uid://dxj44hricnn1x" path="res://nodes/shield.tscn" id="14_oil0f"]
 
 [node name="Main" type="Node"]
 process_mode = 3
@@ -21,7 +22,7 @@ script = ExtResource("1_fgryf")
 [node name="Game" type="Node" parent="."]
 process_mode = 1
 
-[node name="Paddle" parent="Game" instance=ExtResource("1_eux57")]
+[node name="Shield" parent="Game" instance=ExtResource("14_oil0f")]
 position = Vector2(320, 320)
 
 [node name="HorizontalWall" parent="Game" instance=ExtResource("2_vb2a8")]
@@ -35,6 +36,9 @@ position = Vector2(151, 180)
 
 [node name="VerticalWall2" parent="Game" instance=ExtResource("3_npbde")]
 position = Vector2(490, 180)
+
+[node name="Paddle" parent="Game" instance=ExtResource("1_eux57")]
+position = Vector2(320, 320)
 
 [node name="Block" parent="." instance=ExtResource("12_7p5tq")]
 position = Vector2(304, 192)
