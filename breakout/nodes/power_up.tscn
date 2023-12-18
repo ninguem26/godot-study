@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cblxovg6s4qmq"]
+
+[ext_resource type="Texture2D" uid="uid://c1jugjccl2h4e" path="res://assets/white.png" id="1_t5qau"]
+[ext_resource type="Script" path="res://scripts/power_up.gd" id="1_yixyd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbryw"]
+size = Vector2(8, 8)
+
+[node name="PowerUp" type="Area2D"]
+script = ExtResource("1_yixyd")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+self_modulate = Color(0.121569, 0.603922, 1, 1)
+texture = ExtResource("1_t5qau")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qbryw")
