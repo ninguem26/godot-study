@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq37ohco7b51f"]
+
+[ext_resource type="PackedScene" uid="uid://oxoyuualy3qa" path="res://ball.tscn" id="1_yplwe"]
+
+[node name="NonControllableBall" instance=ExtResource("1_yplwe")]
+script = null

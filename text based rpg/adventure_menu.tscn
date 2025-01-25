@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://c27mogftqgctu"]
+
+[ext_resource type="PackedScene" uid="uid://belijpejgiyig" path="res://change_scene_button.tscn" id="1_3q0sr"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartAdventureButton" type="Button" parent="Container"]
+layout_mode = 2
+text = "Iniciar Aventura"
+
+[node name="OtheAdventuresButton" type="Button" parent="Container"]
+layout_mode = 2
+text = "..."
+
+[node name="GoBackButton" parent="Container" instance=ExtResource("1_3q0sr")]
+layout_mode = 2
+text = "Voltar"
+scene_file = "res://main.tscn"

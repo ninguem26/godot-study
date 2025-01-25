@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvruqq2tkvy6g"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ldobt"]
+[ext_resource type="PackedScene" uid="uid://belijpejgiyig" path="res://change_scene_button.tscn" id="2_wtywj"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ldobt")
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AdventureMenuButton" parent="Container" instance=ExtResource("2_wtywj")]
+layout_mode = 2
+text = " Aventuras"
+scene_file = "res://adventure_menu.tscn"
+
+[node name="CharacterMenuButton" parent="Container" instance=ExtResource("2_wtywj")]
+layout_mode = 2
+text = " Personagens"
+scene_file = "res://character_menu.tscn"

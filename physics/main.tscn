@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bchv214qtikgk"]
+
+[ext_resource type="PackedScene" uid="uid://oxoyuualy3qa" path="res://ball.tscn" id="1_6dun8"]
+[ext_resource type="PackedScene" uid="uid://dq37ohco7b51f" path="res://non_controllable_ball.tscn" id="2_v32c0"]
+[ext_resource type="PackedScene" uid="uid://bc8u6bedsrmpv" path="res://wall.tscn" id="3_yxwxa"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Ball" parent="." instance=ExtResource("1_6dun8")]
+position = Vector2(91, 190)
+
+[node name="Wall" parent="." instance=ExtResource("3_yxwxa")]
+position = Vector2(-9, 440)
+scale = Vector2(1, 200)
+
+[node name="Wall2" parent="." instance=ExtResource("3_yxwxa")]
+position = Vector2(650, 481)
+scale = Vector2(1, 200)
+
+[node name="Wall3" parent="." instance=ExtResource("3_yxwxa")]
+position = Vector2(567, -10)
+scale = Vector2(200, 1)
+
+[node name="Wall4" parent="." instance=ExtResource("3_yxwxa")]
+position = Vector2(624, 370)
+scale = Vector2(200, 1)
+
+[node name="NonControllableBall" parent="." instance=ExtResource("2_v32c0")]
+position = Vector2(372, 190)
+
+[node name="NonControllableBall2" parent="." instance=ExtResource("2_v32c0")]
+position = Vector2(410, 171)
+
+[node name="NonControllableBall3" parent="." instance=ExtResource("2_v32c0")]
+position = Vector2(410, 209)
